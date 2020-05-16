@@ -1,0 +1,23 @@
+.NewMessage
+{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    align-items: flex-start;
+}
+
+.new_message_input
+{
+    width: 90%;
+    margin: 5px 10px;
+}
+
+.send_message
+{
+    padding: 10px 30px;
+    background-color: teal;
+    display: inline-block;
+    cursor: pointer;
+    margin: 10px;
+}

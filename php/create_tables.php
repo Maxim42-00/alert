@@ -51,6 +51,14 @@ $tables = [
         "ip" => "tinytext",
         "text" => "text",
         "files" => "text"
+    ],
+    "alert_files" => [
+        "id" => "int(10) AUTO_INCREMENT PRIMARY KEY",
+        "user_id" => "int(10)",
+        "type" => "tinytext",
+        "url" => "tinytext",
+        "date" => "tinytext",
+        "target" => "tinytext"
     ]
 ];
 
@@ -67,3 +75,11 @@ foreach($tables as $table => $fields)
 //sql_insert($pdo, "alert_users", ["null", "max", "mg", "mg42ms1", "123"]);
 //print_r(sql_fetch_posts($pdo, 7));
 //print_r(sql_fetch_comments($pdo, 1));
+//echo sql_delete_by_id($pdo, "alert_posts", 4);
+//echo sql_insert_file($pdo, 50, "image/gif", "astro-margo");
+//print_r(sql_insert_file($pdo, 50, "image/gif", "localhost/php/files/", "fire.jpg", "none"));
+//print_r(sql_select_by_ids($pdo, "alert_files", []));
+//sql_delete_comments_by_post_id($pdo, 13);
+//sql_delete_by_ids($pdo, "alert_users", [9, 10]);
+//sql_delete($pdo, "alert_users", "e_mail", "2");
+print_r(sql_select_by_ids($pdo, "alert_files", [13, 14, 15]));

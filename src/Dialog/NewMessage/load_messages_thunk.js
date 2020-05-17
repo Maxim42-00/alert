@@ -6,6 +6,7 @@ function load_messages_thunk(params, input={})
     {
         let fetch_obj = {};
         let form_data = new FormData();
+        form_data.append("type", params.type);
         if(input.text)
         {
             form_data.append("text", input.text);
@@ -21,9 +22,7 @@ function load_messages_thunk(params, input={})
 
         fetch_obj = {method: "POST", body: form_data, credentials: "include"};
 
-if(params.type === "posts")
-{
-        fetch(host + `/alert/php/${params.type}.php`, fetch_obj)
+        fetch(host + `/alert/php/load_messages.php`, fetch_obj)
             .then(data=>data.json())
             .then(data=>{
                 if(data.status === "ok")
@@ -31,22 +30,6 @@ if(params.type === "posts")
                 else
                     dispatch({type: "SET_AUTH", auth: data.status});
             });
-}
-
-
-if(params.type === "comments")
-{
-        fetch(host + `/alert/php/${params.type}.php`, fetch_obj)
-            .then(data=>data.json())
-            .then(data=>{
-                if(data.status === "ok")
-                    dispatch({type: "LOAD_MESSAGES", messages: data.data, params});
-                else
-                    dispatch({type: "SET_AUTH", auth: data.status});
-
-            });
-}
-
 
     }
 }

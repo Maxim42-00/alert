@@ -20,7 +20,6 @@ function auth_thunk(type, user_data)
             .then(data=>data.json())
             .then(data=>
             {
-                console.log(data);
                 dispatch({type: "AUTH_DATA_RECEIVED", status: data.status});
             });
     };

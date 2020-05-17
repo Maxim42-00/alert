@@ -5,4 +5,13 @@
     border: 1px solid black;
     margin: 5px;
     padding: 5px;
+    position: relative;
+}
+
+.del_msg_btn
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
 }

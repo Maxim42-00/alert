@@ -25,9 +25,12 @@ function chat_reducer(state = default_state, action)
             new_state.comments[action.params.post_id] = [...action.messages];
         }
     }
-    if(action.type === "REMOVE_COMMENTS")
+    if(action.type === "REMOVE_DIALOG")
     {
-        delete(new_state.comments[action.post_id]);
+        if(action.param_type === "comments")
+            delete(new_state.comments[action.post_id]);
+        else
+            new_state[action.param_type] = [];
     }
     return new_state;
 }

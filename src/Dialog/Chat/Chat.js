@@ -39,7 +39,7 @@ class Chat extends React.Component
         let messages = "";
         if(this.props.messages)
         {
-            messages = this.props.messages.map(cur => <Message user={cur.user} date={timestamp_to_string(cur.date*1000)} ip={cur.ip} text={cur.text} files={cur.files} my_id={this.props.my_id} user_id={cur.user_id} params={this.props.params} message_id = {cur.id} del_msg={this.props.del_msg} />);
+            messages = this.props.messages.map(cur => <Message date={timestamp_to_string(cur.date*1000)} ip={cur.ip} text={cur.text} files={cur.files} my_id={this.props.my_id} user_id={cur.user_id} params={this.props.params} message_id = {cur.id} del_msg={this.props.del_msg} user_name={cur.name} user_surname={cur.surname} recall={cur.recall} msg_type={cur.msg_type} add_to_recall={this.props.add_to_recall} />);
         }
         return (
             <div className="Chat" style={style} id="Chat">

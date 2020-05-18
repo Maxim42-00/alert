@@ -1,6 +1,6 @@
 import {host} from "../../host";
 
-function load_messages_thunk(params, input={})
+function load_messages_thunk(params, input={}, msg_for_recall="")
 {
     return function(dispatch)
     {
@@ -16,6 +16,10 @@ function load_messages_thunk(params, input={})
             input.files.forEach(file => {
                 form_data.append("files[]", file, file.name);
             });
+        }
+        if(msg_for_recall)
+        {
+            form_data.append("recall", JSON.stringify(msg_for_recall));
         }
         if(params.type === "comments")
             form_data.append("post_id", params.post_id);

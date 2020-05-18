@@ -16,7 +16,8 @@ $tables = [
         "date" => "tinytext",
         "ip" => "tinytext",
         "text" => "text",
-        "files" => "text"
+        "files" => "text",
+        "recall" => "tinytext"
     ],
     "alert_chat_ids" => [
         "id" => "int(10) AUTO_INCREMENT PRIMARY KEY",
@@ -50,7 +51,8 @@ $tables = [
         "date" => "tinytext",
         "ip" => "tinytext",
         "text" => "text",
-        "files" => "text"
+        "files" => "text",
+        "recall" => "tinytext"
     ],
     "alert_files" => [
         "id" => "int(10) AUTO_INCREMENT PRIMARY KEY",
@@ -82,4 +84,4 @@ foreach($tables as $table => $fields)
 //sql_delete_comments_by_post_id($pdo, 13);
 //sql_delete_by_ids($pdo, "alert_users", [9, 10]);
 //sql_delete($pdo, "alert_users", "e_mail", "2");
-print_r(sql_select_by_ids($pdo, "alert_files", [13, 14, 15]));
+print_r(array_merge([["name"=>"max", "type"=>"posts", "id"=>5]], [["name"=>"max", "type"=>"posts", "id"=>5]]));

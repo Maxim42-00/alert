@@ -9,12 +9,14 @@ import {BrowserRouter} from "react-router-dom";
 import menu_items_reducer from "./reducers/menu_items_reducer";
 import auth_reducer from "./reducers/auth_reducer";
 import private_reducer from "./reducers/private_reducer";
+import new_message_reducer from "./reducers/new_message_reducer";
 
 const reducers = combineReducers({
     auth: auth_reducer,
     menu: menu_items_reducer,
     chat: chat_reducer,
-    private: private_reducer
+    private: private_reducer,
+    new_message: new_message_reducer
 });
 
 let store = createStore(reducers, applyMiddleware(thunk));

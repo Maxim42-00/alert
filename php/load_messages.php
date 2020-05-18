@@ -7,6 +7,49 @@ require_once "accept_files.php";
 header("Access-Control-Allow-Origin: http://localhost:3000");
 header("Access-Control-Allow-Credentials: true");
 
+function recall_backtrace($pdo, $recall_json)
+{
+    if($recall_json === "none")
+        return [];
+    $recall = json_decode($recall_json, true);
+
+    $type = $recall["type"];
+    $id = $recall["id"];
+
+    $recall = sql_select_by_id($pdo, "alert_" . $recall["type"], $recall["id"]);
+    if(!$recall)
+        return [];
+    $user = sql_select_by_id($pdo, "alert_users", $recall["user_id"]);
+    $recall["name"] = $user["name"];
+    $recall["surname"] = $user["surname"];
+    $recall["files"] = sql_select_by_ids($pdo, "alert_files", json_decode($recall["files"], true));
+    $recall["msg_type"] = $type;
+
+    return array_merge([$recall], recall_backtrace($pdo, $recall["recall"]));
+}
+
+function get_recall($pdo, $recall_json)
+{
+    if($recall_json === "none")
+        return "none";
+    $recall = json_decode($recall_json, true);
+
+    $type = $recall["type"];
+
+    $recall = sql_select_by_id($pdo, "alert_" . $recall["type"], $recall["id"]);
+    if(!$recall)
+        return "none";
+    $recall["files"] = sql_select_by_ids($pdo, "alert_files", json_decode($recall["files"], true));
+
+    $user = sql_select_by_id($pdo, "alert_users", $recall["user_id"]);
+    $recall["name"] = $user["name"];
+    $recall["surname"] = $user["surname"];
+    $recall["recall_backtrace"] = recall_backtrace($pdo, $recall["recall"]);
+    $recall["msg_type"] = $type;
+    unset($recall["recall"]);
+    return $recall;
+}
+
 $id = is_auth();
 
 if($id)
@@ -23,14 +66,23 @@ if($id)
         $files = accept_files($pdo, $id, $_FILES["files"], $msg_type);
     }
 
+    if(isset($_POST["recall"]))
+    {
+        $recall = $_POST["recall"];
+    }
+    else
+        $recall = "none";
+
+//$recall = json_encode(["type" => "posts", "id" => 8]);
+
     if(isset($text) || isset($files))
     {
         $time = "" . time();
         if(!isset($files)) $files = [];
         if($msg_type === "posts")
-            $values = ["null", $id, $time, $_SERVER["REMOTE_ADDR"], $text, json_encode($files, JSON_UNESCAPED_UNICODE)];
+            $values = ["null", $id, $time, $_SERVER["REMOTE_ADDR"], $text, json_encode($files, JSON_UNESCAPED_UNICODE), $recall];
         if($msg_type === "comments")
-            $values = ["null", $id, $_POST["post_id"], $time, $_SERVER["REMOTE_ADDR"], $text, json_encode($files, JSON_UNESCAPED_UNICODE)];
+            $values = ["null", $id, $_POST["post_id"], $time, $_SERVER["REMOTE_ADDR"], $text, json_encode($files, JSON_UNESCAPED_UNICODE), $recall];
         sql_insert($pdo, "alert_" . $msg_type, $values);
     }
 
@@ -41,6 +93,11 @@ if($id)
     foreach($messages as &$message)
     {
         $message["files"] = sql_select_by_ids($pdo, "alert_files", json_decode($message["files"], true));
+        $user = sql_select_by_id($pdo, "alert_users", $message["user_id"]);
+        $message["name"] = $user["name"];
+        $message["surname"] = $user["surname"];
+        $message["recall"] = get_recall($pdo, $message["recall"]);
+        $message["msg_type"] = $msg_type;
     }
 
     

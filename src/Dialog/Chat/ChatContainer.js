@@ -25,7 +25,8 @@ function mapDispatchToProps(dispatch)
     return {
         load_messages: (params)=>dispatch(load_messages_thunk(params)),
         remove_dialog: (type, post_id=0)=>dispatch({type: "REMOVE_DIALOG", param_type: type, post_id}),
-        del_msg: (params, id)=>dispatch(del_msg_thunk(params, id))
+        del_msg: (params, id)=>dispatch(del_msg_thunk(params, id)),
+        add_to_recall: (msg_type, msg_id)=>dispatch({type: "ADD_TO_RECALL", msg_type, msg_id})
     };
 }
 

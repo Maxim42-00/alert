@@ -25,7 +25,7 @@ class NewMessage extends React.Component
     }
     send()
     {
-        this.props.load_messages(this.props.params, this.state, this.props.msg_for_recall);
+        this.props.load_messages(this.props.params, this.state, this.props.msg_for_recall, {user_id: this.props.match.params.user_id});
         this.setState({text: "", files: []});
         this.files_val.value="";
         this.props.del_msg_for_recall();

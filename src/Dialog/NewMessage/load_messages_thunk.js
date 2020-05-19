@@ -1,6 +1,6 @@
 import {host} from "../../host";
 
-function load_messages_thunk(params, input={}, msg_for_recall="")
+function load_messages_thunk(params, input={}, msg_for_recall="", query_params={})
 {
     return function(dispatch)
     {
@@ -26,9 +26,16 @@ function load_messages_thunk(params, input={}, msg_for_recall="")
 
         fetch_obj = {method: "POST", body: form_data, credentials: "include"};
 
-        fetch(host + `/alert/php/load_messages.php`, fetch_obj)
+        let query_string="";
+        if(query_params.user_id)
+        {
+            query_string=`?user_id=${query_params.user_id}`;
+        }
+
+        fetch(host + `/alert/php/load_messages.php${query_string}`, fetch_obj)
             .then(data=>data.json())
             .then(data=>{
+console.log(data);
                 if(data.status === "ok")
                     dispatch({type: "LOAD_MESSAGES", messages: data.data, params});
                 else

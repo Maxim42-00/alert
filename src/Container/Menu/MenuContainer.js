@@ -4,7 +4,8 @@ import {connect} from "react-redux";
 function mapStateToProps(state)
 {
     return {
-        menu_items: state.menu.menu_items
+        menu_items: state.menu.menu_items,
+        my_id: state.auth.my_id
     };
 }
 

@@ -35,7 +35,7 @@ class NewAccount extends React.Component
     }
     redirect_to_private()
     {
-        this.props.history.push("/alert/private");
+        this.props.history.push("/alert/private/" + this.props.my_id);
     }
     componentDidMount()
     {

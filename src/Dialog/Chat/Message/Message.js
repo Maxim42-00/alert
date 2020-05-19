@@ -5,6 +5,7 @@ import Dialog from "../../Dialog";
 import timestamp_to_string from "../../../functions/timestamp_to_string";
 import RecallRef from "./RecallRef/RecallRef";
 import MsgMenuPanel from "./MsgMenuPanel/MsgMenuPanel";
+import {host} from "../../../host";
 
 class Message extends React.Component
 {
@@ -18,7 +19,7 @@ class Message extends React.Component
         if(this.props.recall !== "none")
         {
             const recall_props = this.props.recall;
-            recall = <Message date={timestamp_to_string(recall_props.date*1000)} ip={recall_props.ip} text={recall_props.text} files={recall_props.files} user_id={recall_props.user_id} message_id={recall_props.id} user_name={recall_props.name} user_surname={recall_props.surname} recall={"none"} recall_backtrace={recall_props.recall_backtrace} recalled_msg={true} params={this.props.params} msg_type={recall_props.msg_type} add_to_recall={this.props.add_to_recall} />
+            recall = <Message date={timestamp_to_string(recall_props.date*1000)} ip={recall_props.ip} text={recall_props.text} files={recall_props.files} user_id={recall_props.user_id} message_id={recall_props.id} user_name={recall_props.name} user_surname={recall_props.surname} img={recall_props.img} recall={"none"} recall_backtrace={recall_props.recall_backtrace} recalled_msg={true} params={this.props.params} msg_type={recall_props.msg_type} add_to_recall={this.props.add_to_recall} />
         }
 
         let msg_menu_panel = ""; //
@@ -42,14 +43,25 @@ class Message extends React.Component
             recall_backtrace = this.props.recall_backtrace.map(cur => <RecallRef msg_data={cur} params={this.props.params} add_to_recall={this.props.add_to_recall} />);
         }
 
+        let img;
+        if(this.props.img)
+            img = <img src={this.props.img} style={{padding: "5px"}} width="50" />;
+        else
+            img = <img src={host + "/alert/php/files/0.jpg"} style={{padding: "5px"}} width="50" />
+
         return (
             <div className="Message" style={recalled_style}>
                 {msg_menu_panel}
-                {recall}
-                <div>{this.props.user_name}</div>
-                <div>{this.props.user_surname}</div>
+                <div>
+                    {img}
+                    <span>
+                        <span>{this.props.user_name}</span><br />
+                        <span>{this.props.user_surname}</span>
+                    </span>
+                </div>
                 <div>{this.props.date}</div>
                 <div>{this.props.ip}</div>
+                {recall}
                 <div>{this.props.text}</div>
                 <div>
                     {files}

@@ -7,12 +7,13 @@ class Menu extends React.Component
     render()
     {
         let menu_items = this.props.menu_items.map((cur, i)=>
-            <div><NavLink activeClassName="menu_active_link" className="menu_nav_link" exact to={"/take"+cur.src}> <span className="menu_item"> {cur.name} </span> </NavLink></div>);
+            <div><NavLink activeClassName="menu_active_link" className="menu_nav_link" exact to={"/alert"+cur.src}> <span className="menu_item"> {cur.name} </span> </NavLink></div>);
         return (
             <div className="Menu">
                 <div className="menu_btn">MENU</div>
                 <div className="menu_logo">Astro-Margo.ru</div>
                 <div className="menu_panel">
+                    <div><NavLink activeClassName="menu_active_link" className="menu_nav_link" exact to={"/alert/private/"+this.props.my_id}> <span className="menu_item"> Моя Страница </span> </NavLink></div>
                     {menu_items}
                     <div><NavLink activeClassName="menu_active_link" className="menu_nav_link" exact to={"/alert"}> <span className="menu_item" onClick={this.props.quit}> Выйти </span> </NavLink></div>
                 </div>

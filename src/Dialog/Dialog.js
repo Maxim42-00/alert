@@ -34,7 +34,7 @@ class Dialog extends React.Component
         {
             content = 
             [
-                <NewMessageContainer params={this.props.params} />,
+                (this.props.user_id === this.props.my_id ? <NewMessageContainer params={this.props.params} /> : ""),
                 <ChatContainer params={this.props.params} />
             ];
         }

@@ -10,14 +10,17 @@ function mapStateToProps(state)
         surname: state.private.surname,
         is_auth: state.auth.is_auth,
         waiting: state.private.waiting,
-        user_id: state.private.user_id
+        my_id: state.auth.my_id,
+        found: state.private.found,
+        cur_user_id: state.private.cur_user_id,
+        img: state.private.img
     };
 }
 
 function mapDispatchToProps(dispatch)
 {
     return {
-        load_private_data: ()=>dispatch(load_private_data_thunk)
+        load_private_data: (id)=>dispatch(load_private_data_thunk(id))
     };
 }
 

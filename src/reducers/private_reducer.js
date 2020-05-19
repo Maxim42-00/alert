@@ -2,8 +2,9 @@ const default_state = {
     name: "",
     surname: "",
     img: "",
-    user_id: "",
-    waiting: false
+    waiting: false,
+    found: "",
+    cur_user_id: ""
 };
 
 function private_reducer(state = default_state, action)
@@ -19,9 +20,13 @@ function private_reducer(state = default_state, action)
         new_state.waiting = false;
         if(action.status === "ok")
         {
-            new_state.name = action.data.name;
-            new_state.surname = action.data.surname;
-            new_state.user_id = action.data.id;
+            if( (new_state.found=action.found) === "found")
+            {
+                new_state.name = action.data.name;
+                new_state.surname = action.data.surname;
+                new_state.cur_user_id = action.data.id;
+                new_state.img = action.data.img;
+            }
         }
         return new_state;
     }

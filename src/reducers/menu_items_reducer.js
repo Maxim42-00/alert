@@ -1,20 +1,8 @@
 ﻿let default_state = {
     menu_items: [
         {
-            name: "Личный кабинет",
-            src: "/private"
-        },
-        {
-            name: "Моя Аренда",
-            src: "/my_arend"
-        },
-        {
-            name: "Действия",
-            src: "/actions"
-        },
-        {
-            name: "Форум",
-            src: "/forum"
+            name: "Аккаунт",
+            src: "/account"
         }
     ]
 };

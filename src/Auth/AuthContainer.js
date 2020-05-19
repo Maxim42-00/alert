@@ -7,7 +7,8 @@ function mapStateToProps(state)
 {
     return {
         waiting: state.auth.waiting,
-        is_auth: state.auth.is_auth
+        is_auth: state.auth.is_auth,
+        my_id: state.auth.my_id
     };
 }
 

@@ -19,8 +19,10 @@ if($type === "new_account")
             exit();
         }
     }
-    sql_insert($pdo, "alert_users", ["id" => "null", "name" => $_POST["name"], "surname" => $_POST["surname"], "e_mail" => $_POST["e_mail"], "password" => $_POST["password"]]);
-    echo json_encode(["status" => "ok"]);
+    sql_insert($pdo, "alert_users", ["null", $_POST["name"], $_POST["surname"], $_POST["e_mail"], $_POST["password"], "[0]"]);
+    $my_id_record = sql_select($pdo, "alert_users", "e_mail", $_POST["e_mail"]);
+    $my_id = $my_id_record[0]["id"];
+    echo json_encode(["status" => "ok", "id" => $my_id]);
     setcookie("e_mail", $_POST["e_mail"]);
     setcookie("password", $_POST["password"]);
 }
@@ -36,7 +38,9 @@ if($type === "log_in")
         {
             setcookie("e_mail", $_POST["e_mail"]);
             setcookie("password", $_POST["password"]);
-            echo json_encode(["status" => "ok"]);
+            $my_id_record = sql_select($pdo, "alert_users", "e_mail", $_POST["e_mail"]);
+            $my_id = $my_id_record[0]["id"];
+            echo json_encode(["status" => "ok", "id" => $my_id]);
             exit();
         }
     }

@@ -10,7 +10,7 @@ function sql_create_table($pdo, $name, $fields)
     $sql = "create table if not exists " . $name . "(";
     foreach($fields as $field_name => $field_type)
     {
-        $sql = $sql . "$field_name $field_type NOT NULL,";
+        $sql = $sql . "$field_name $field_type,";
     }
     $sql = rtrim($sql, ",");
     $sql = $sql . ")";
@@ -139,6 +139,19 @@ function sql_delete_by_ids($pdo, $table, $ids)
 function sql_delete($pdo, $table, $field, $value)
 {
     $sql = "delete from $table where $field=$value";
+    $res = $pdo->prepare($sql);
+    return $res->execute();
+}
+
+function sql_update_by_id($pdo, $table, $id, $values)
+{
+    $sql = "update $table set";
+    foreach($values as $key=>$value)
+    {
+        $sql = $sql . " $key='$value',";
+    }
+    $sql = rtrim($sql, ',');
+    $sql = $sql . " where id=$id";
     $res = $pdo->prepare($sql);
     return $res->execute();
 }

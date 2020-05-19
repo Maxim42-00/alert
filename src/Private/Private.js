@@ -2,6 +2,7 @@ import React from "react";
 import Waiting from "../Waiting/Waiting";
 import "./Private.css";
 import Dialog from "../Dialog/Dialog";
+import {host} from "../host";
 
 class Private extends React.Component
 {
@@ -16,7 +17,7 @@ class Private extends React.Component
     }
     componentDidMount()
     {
-        this.props.load_private_data();
+        this.props.load_private_data(this.props.match.params.user_id);
     }
     componentDidUpdate()
     {
@@ -24,9 +25,26 @@ class Private extends React.Component
         {
             this.redirect_to_login();
         }
+        if(this.props.cur_user_id !== this.props.match.params.user_id)
+            this.props.load_private_data(this.props.match.params.user_id);
     }
     render()
     {
+        if(this.props.found === "not_found")
+        {
+            return (
+                <div>
+                    <h1> Not Found </h1>
+                </div>
+            );
+        }
+
+        let img;
+        if(this.props.img)
+            img = <img src={this.props.img} style={{padding: "5px"}} width="200" />;
+        else
+            img = <img src={host + "/alert/php/files/0.jpg"} style={{padding: "5px"}} width="200" />
+
         return (
             <div className="Private">
                 {this.props.waiting ? <Waiting /> : ""}
@@ -35,10 +53,9 @@ class Private extends React.Component
                         <span className="private_field"> {this.props.name} </span>
                         <span className="private_field"> {this.props.surname} </span>
                     </div>
-                    <div className="private_img_div">
-                    </div>
+                    <div>{img}</div>
                 </div>
-                <Dialog params={{type: "posts", user_id: this.props.user_id}} />
+                <Dialog params={{type: "posts"}} user_id={this.props.match.params.user_id} my_id={this.props.my_id} />
             </div>
         );
     }

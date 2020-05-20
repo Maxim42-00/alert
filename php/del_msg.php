@@ -4,11 +4,12 @@ require_once "sql.php";
 require_once "is_auth.php";
 require_once "accept_files.php";
 require "del_files.php";
+require_once "msg_is_deletable.php";
 
 header("Access-Control-Allow-Origin: http://localhost:3000");
 header("Access-Control-Allow-Credentials: true");
 
-$id = is_auth();
+$my_id = is_auth();
 
 
 
@@ -37,14 +38,14 @@ function del_msg($pdo, $msg_type, $msg_id)
 
 
 
-if($id)
+if($my_id)
 {
     $msg_id = $_POST["id"];
     $msg_type = $_POST["type"];
     $pdo = sql_create_pdo();
     $msg = sql_select_by_id($pdo, "alert_" . $msg_type, $msg_id);
 
-    if($id === $msg["user_id"])
+    if(msg_is_deletable($pdo, $msg, $msg_type, $my_id))
     {
         del_msg($pdo, $msg_type, $msg_id);
         echo json_encode(["status" => "ok"]);

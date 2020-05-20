@@ -12,6 +12,7 @@ class Account extends React.Component
         this.file_change = this.file_change.bind(this);
         this.load_account_data = this.load_account_data.bind(this);
         this.del_img = this.del_img.bind(this);
+        this.delete_account = this.delete_account.bind(this);
 
         this.state = {};
         this.altered_data={};
@@ -63,6 +64,11 @@ class Account extends React.Component
             return;
         this.props.load_account_data(this.altered_data);
     }
+    delete_account()
+    {
+        this.props.delete_account();
+        this.props.history.push("/alert");
+    }
 
     render()
     {
@@ -101,6 +107,7 @@ class Account extends React.Component
                     <input type="password" className="account_input" value={this.state.password} onChange={(e)=>this.input_change("password", e.target.value)} />
                 </div>
                 <div className="account_btn" onClick={this.load_account_data}> Сохранить Изменения </div>
+                <div className="account_btn" onClick={()=>this.delete_account()}> Удалить Аккаунт </div>
             </div>
         );
     }

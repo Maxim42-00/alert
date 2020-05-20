@@ -1,6 +1,7 @@
 <?php
 
 require_once "sql.php";
+require_once "set_updates.php";
 
 $tables = [
     "alert_users" => [
@@ -63,6 +64,11 @@ $tables = [
         "url" => "tinytext NOT NULL",
         "date" => "tinytext NOT NULL",
         "target" => "tinytext NOT NULL"
+    ],
+    "alert_updates" => [
+        "id" => "int(10) NOT NULL",
+        "updates" => "text NOT NULL",
+        "online" => "tinytext NOT NULL"
     ]
 ];
 
@@ -91,3 +97,5 @@ foreach($tables as $table => $fields)
 //insert into alert_users values(null, "Max", "Gorbunov", "mg42ms1@gmail.com", "12345");
 //update alert_users set name="Qwery", surname="opa", e_mail="mail", password="pwsw", img="none" where id=1;
 //sql_update_by_id($pdo, "alert_users", 1, ["name"=>"Qwery1", "surname"=>"op1a", "e_mail"=>"ma1il", "password"=>"p1wsw", "img"=>0]);
+//set_updates($pdo, "comments", 9);
+echo (sql_select_by_id($pdo, "alert_updates", 3))["updates"];

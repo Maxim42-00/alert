@@ -9,6 +9,17 @@ import AccountContainer from "./Account/AccountContainer";
 
 class App extends React.Component
 {
+    componentDidMount()
+    {
+        this.interval = setInterval(this.props.get_updates, 5000, "online");
+        window.addEventListener("beforeunload", ()=>this.props.get_updates("offline"));
+    }
+    componentWillUnmount()
+    {
+        window.removeEventListener("beforeunload", ()=>this.props.get_updates("offline"));
+        clearInterval(this.interval);
+    }
+
     render()
     {
         return (

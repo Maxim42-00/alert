@@ -4,6 +4,8 @@ require_once "sql.php";
 require_once "is_auth.php";
 require_once "accept_files.php";
 require_once "get_img_of_user.php";
+require_once "msg_is_deletable.php";
+require_once "set_updates.php";
 
 header("Access-Control-Allow-Origin: http://localhost:3000");
 header("Access-Control-Allow-Credentials: true");
@@ -26,6 +28,7 @@ function recall_backtrace($pdo, $recall_json)
     $recall["img"] = get_img_of_user($pdo, $user);
     $recall["files"] = sql_select_by_ids($pdo, "alert_files", json_decode($recall["files"], true));
     $recall["msg_type"] = $type;
+    $message["deletable"] = false;
 
     return array_merge([$recall], recall_backtrace($pdo, $recall["recall"]));
 }
@@ -49,6 +52,7 @@ function get_recall($pdo, $recall_json)
     $recall["img"] = get_img_of_user($pdo, $user);
     $recall["recall_backtrace"] = recall_backtrace($pdo, $recall["recall"]);
     $recall["msg_type"] = $type;
+    $message["deletable"] = false;
     unset($recall["recall"]);
     return $recall;
 }
@@ -76,18 +80,22 @@ if($my_id)
     {
         $recall = $_POST["recall"];
     }
-    else
-        $recall = "none";
 
-    if(isset($text) || isset($files))
+
+    if(isset($text) || isset($files) || isset($recall))
     {
         $time = "" . time();
         if(!isset($files)) $files = [];
+        if(!isset($recall)) $recall = "none";
+        if(!isset($text)) $text = " ";
         if($msg_type === "posts")
             $values = ["null", $my_id, $time, $_SERVER["REMOTE_ADDR"], $text, json_encode($files, JSON_UNESCAPED_UNICODE), $recall];
         if($msg_type === "comments")
             $values = ["null", $my_id, $_POST["post_id"], $time, $_SERVER["REMOTE_ADDR"], $text, json_encode($files, JSON_UNESCAPED_UNICODE), $recall];
         sql_insert($pdo, "alert_" . $msg_type, $values);
+
+        if($msg_type === "comments")
+            set_updates($pdo, $msg_type, $_POST["post_id"]);
     }
 
     if($msg_type === "posts")
@@ -103,6 +111,7 @@ if($my_id)
         $message["img"] = get_img_of_user($pdo, $user);
         $message["recall"] = get_recall($pdo, $message["recall"]);
         $message["msg_type"] = $msg_type;
+        $message["deletable"] = msg_is_deletable($pdo, $message, $msg_type, $my_id);
     }
 
     

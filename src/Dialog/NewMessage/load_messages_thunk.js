@@ -35,7 +35,6 @@ function load_messages_thunk(params, input={}, msg_for_recall="", query_params={
         fetch(host + `/alert/php/load_messages.php${query_string}`, fetch_obj)
             .then(data=>data.json())
             .then(data=>{
-console.log(data);
                 if(data.status === "ok")
                     dispatch({type: "LOAD_MESSAGES", messages: data.data, params});
                 else

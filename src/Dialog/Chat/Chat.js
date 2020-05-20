@@ -12,7 +12,6 @@ class Chat extends React.Component
     componentDidMount()
     {
         this.props.load_messages(this.props.params, {}, "", {user_id: this.props.match.params.user_id});
-   //     this.interval = setInterval(this.props.load_messages, 5000, this.props.params);
     }
     componentDidUpdate()
     {
@@ -23,7 +22,6 @@ class Chat extends React.Component
     }
     componentWillUnmount()
     {
-    //    clearInterval(this.interval);
         if(this.props.params.type === "comments")
             this.props.remove_dialog("comments", this.props.params.post_id);
         else
@@ -39,7 +37,7 @@ class Chat extends React.Component
         let messages = "";
         if(this.props.messages)
         {
-            messages = this.props.messages.map(cur => <Message date={timestamp_to_string(cur.date*1000)} ip={cur.ip} text={cur.text} files={cur.files} my_id={this.props.my_id} user_id={cur.user_id} params={this.props.params} message_id = {cur.id} del_msg={this.props.del_msg} user_name={cur.name} user_surname={cur.surname} recall={cur.recall} msg_type={cur.msg_type} add_to_recall={this.props.add_to_recall} img={cur.img} />);
+            messages = this.props.messages.map(cur => <Message date={timestamp_to_string(cur.date*1000)} ip={cur.ip} text={cur.text} files={cur.files} my_id={this.props.my_id} user_id={cur.user_id} params={this.props.params} message_id = {cur.id} del_msg={this.props.del_msg} user_name={cur.name} user_surname={cur.surname} recall={cur.recall} msg_type={cur.msg_type} add_to_recall={this.props.add_to_recall} img={cur.img} deletable={cur.deletable} />);
         }
         return (
             <div className="Chat" style={style} id="Chat">

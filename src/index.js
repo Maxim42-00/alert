@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import AppContainer from "./AppContainer";
 import {Provider} from "react-redux";
 import {createStore, applyMiddleware, combineReducers} from "redux";
 import chat_reducer from "./reducers/chat_reducer";
@@ -11,6 +11,7 @@ import auth_reducer from "./reducers/auth_reducer";
 import private_reducer from "./reducers/private_reducer";
 import new_message_reducer from "./reducers/new_message_reducer";
 import account_reducer from "./reducers/account_reducer";
+import app_reducer from "./reducers/app_reducer";
 
 const reducers = combineReducers({
     auth: auth_reducer,
@@ -18,7 +19,8 @@ const reducers = combineReducers({
     chat: chat_reducer,
     private: private_reducer,
     new_message: new_message_reducer,
-    account: account_reducer
+    account: account_reducer,
+    app: app_reducer
 });
 
 let store = createStore(reducers, applyMiddleware(thunk));
@@ -26,7 +28,7 @@ let store = createStore(reducers, applyMiddleware(thunk));
 ReactDOM.render(
     <BrowserRouter>
         <Provider store={store}>
-            <App />
+            <AppContainer />
         </Provider>
     </BrowserRouter>,
     document.querySelector("#root")

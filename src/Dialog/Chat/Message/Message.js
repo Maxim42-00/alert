@@ -27,7 +27,7 @@ class Message extends React.Component
         let recall_btn = <span onClick={()=>this.props.add_to_recall(this.props.msg_type, this.props.message_id)}>{">"}</span>;
 
         let del_msg_btn="";
-        if(this.props.user_id === this.props.my_id && !this.props.recalled_msg && !this.props.recall_window)
+        if(this.props.deletable)
         {
             del_msg_btn = <span onClick={()=>this.props.del_msg(this.props.params, this.props.message_id)}>X</span>;
             msg_menu_panel = <MsgMenuPanel>{[recall_btn, del_msg_btn]}</MsgMenuPanel>;

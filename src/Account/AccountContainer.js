@@ -2,6 +2,7 @@ import Account from "./Account";
 import {connect} from "react-redux";
 import load_account_data_thunk from "./load_account_data_thunk";
 import {withRouter} from "react-router-dom";
+import delete_account_thunk from "./delete_account_thunk";
 
 function mapStateToProps(state)
 {
@@ -18,7 +19,8 @@ function mapStateToProps(state)
 function mapDispatchToProps(dispatch)
 {
     return {
-        load_account_data: (input)=>dispatch(load_account_data_thunk(input))
+        load_account_data: (input)=>dispatch(load_account_data_thunk(input)),
+        delete_account: ()=>dispatch(delete_account_thunk)
     };
 }
 

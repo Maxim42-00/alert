@@ -5,13 +5,15 @@ import get_updates_thunk from "./get_updates_thunk";
 function mapStateToProps(state)
 {
     return {
+        comments: state.chat.comments_displayed,
+        chat_users_ids: state.chat.users_ids
     };
 }
 
 function mapDispatchToProps(dispatch)
 {
     return {
-        get_updates: (online)=>dispatch(get_updates_thunk(online))
+        get_updates: (online, display, users_ids)=>dispatch(get_updates_thunk(online, display, users_ids))
     };
 }
 

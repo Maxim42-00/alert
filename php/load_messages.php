@@ -6,9 +6,8 @@ require_once "accept_files.php";
 require_once "get_img_of_user.php";
 require_once "msg_is_deletable.php";
 require_once "set_updates.php";
-
-header("Access-Control-Allow-Origin: http://localhost:3000");
-header("Access-Control-Allow-Credentials: true");
+require_once "delete_updates.php";
+require_once "access_allow_origin.php";
 
 function recall_backtrace($pdo, $recall_json)
 {
@@ -95,13 +94,16 @@ if($my_id)
         sql_insert($pdo, "alert_" . $msg_type, $values);
 
         if($msg_type === "comments")
-            set_updates($pdo, $msg_type, $_POST["post_id"]);
+            set_updates($pdo, $my_id, $msg_type, $_POST["post_id"]);
     }
 
     if($msg_type === "posts")
         $messages = sql_fetch_posts($pdo, $user_id);
     if($msg_type === "comments")
+    {
         $messages = sql_fetch_comments($pdo, $_POST["post_id"]);
+        delete_updates($pdo, $my_id, $msg_type, $_POST["post_id"]);
+    }
     foreach($messages as &$message)
     {
         $message["files"] = sql_select_by_ids($pdo, "alert_files", json_decode($message["files"], true));

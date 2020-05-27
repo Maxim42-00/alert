@@ -70,3 +70,27 @@
 {
     color: orange;
 }
+
+.menu_panel
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.menu_nav_div
+{
+    display: flex;
+    align-items: center;
+}
+
+.menu_update_label
+{
+    width: 20px;
+    height: 20px;
+    background-color: orange;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}

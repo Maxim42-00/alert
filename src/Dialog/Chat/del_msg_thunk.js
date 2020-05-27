@@ -14,7 +14,7 @@ function del_msg_thunk(params, id)
             .then(data=>{
                 if(data.status === "ok")
                 {
-                    dispatch(load_messages_thunk(params));
+                    dispatch(load_messages_thunk(params, {}, "", {user_id: params.user_id}));
                 }
             });
     }

@@ -5,9 +5,7 @@ require_once "is_auth.php";
 require_once "accept_files.php";
 require "del_files.php";
 require_once "msg_is_deletable.php";
-
-header("Access-Control-Allow-Origin: http://localhost:3000");
-header("Access-Control-Allow-Credentials: true");
+require_once "access_allow_origin.php";
 
 $my_id = is_auth();
 

@@ -3,6 +3,7 @@
 function sql_create_pdo()
 {
     return $pdo = new PDO("mysql:host=localhost;dbname=test", "root", "", [PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING]);
+  //  return $pdo = new PDO("mysql:host=localhost;dbname=u0859366_default", "u0859366_default", "A32FWxU!", [PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING]);
 }
 
 function sql_create_table($pdo, $name, $fields)

@@ -6,6 +6,7 @@ import timestamp_to_string from "../../../functions/timestamp_to_string";
 import RecallRef from "./RecallRef/RecallRef";
 import MsgMenuPanel from "./MsgMenuPanel/MsgMenuPanel";
 import {host} from "../../../host";
+import UserImgContainer from "../../../UserImg/UserImgContainer";
 
 class Message extends React.Component
 {
@@ -53,7 +54,7 @@ class Message extends React.Component
             <div className="Message" style={recalled_style}>
                 {msg_menu_panel}
                 <div>
-                    {img}
+                    <UserImgContainer user_id={this.props.user_id} img={this.props.img} />
                     <span>
                         <span>{this.props.user_name}</span><br />
                         <span>{this.props.user_surname}</span>

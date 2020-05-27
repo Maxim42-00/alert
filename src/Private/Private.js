@@ -55,7 +55,7 @@ class Private extends React.Component
                     </div>
                     <div>{img}</div>
                 </div>
-                <Dialog params={{type: "posts"}} user_id={this.props.match.params.user_id} my_id={this.props.my_id} />
+                <Dialog params={{type: "posts", user_id: this.props.match.params.user_id}}  my_id={this.props.my_id} />
             </div>
         );
     }

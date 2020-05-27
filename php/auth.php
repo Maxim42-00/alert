@@ -23,9 +23,9 @@ if($type === "new_account")
     $my_id_record = sql_select($pdo, "alert_users", "e_mail", $_POST["e_mail"]);
     $my_id = $my_id_record[0]["id"];
     sql_insert($pdo, "alert_updates", [$my_id, "[]", "online"]);
-    echo json_encode(["status" => "ok", "id" => $my_id]);
     setcookie("e_mail", $_POST["e_mail"]);
     setcookie("password", $_POST["password"]);
+    echo json_encode(["status" => "ok", "id" => $my_id]);
 }
 
 if($type === "log_in")

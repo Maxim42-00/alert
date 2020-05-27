@@ -6,7 +6,7 @@ require_once "is_auth.php";
 header("Access-Control-Allow-Origin: http://localhost:3000");
 header("Access-Control-Allow-Credentials: true");
 
-$online = $_GET["online"];
+$online = $_POST["online"];
 
 function get_updates($online)
 {
@@ -15,9 +15,11 @@ function get_updates($online)
     if($my_id)
     {
         $pdo = sql_create_pdo();
-        $my_updates = (sql_select_by_id($pdo, "alert_updates", $my_id))["updates"];
-
         sql_update_by_id($pdo, "alert_updates", $my_id, ["online" => $online]);
+        if($online === "offline")
+            return json_encode(["status" => "offline"]);
+
+        $my_updates = (sql_select_by_id($pdo, "alert_updates", $my_id))["updates"];
 
         return json_encode(["status" => "ok", "updates" => $my_updates]);
     }

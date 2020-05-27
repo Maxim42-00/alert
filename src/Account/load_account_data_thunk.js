@@ -19,6 +19,7 @@ function load_account_data_thunk(input="")
         if(input.e_mail) form_data.append("e_mail", input.e_mail);
         if(input.password) form_data.append("password", input.password);
 
+        dispatch({type: "ACCOUNT_WAIT"});
         fetch(host + "/alert/php/account.php", {method: "POST", body: form_data, credentials: "include"})
             .then(data=>data.json())
             .then(data=>

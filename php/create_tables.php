@@ -73,12 +73,12 @@ $tables = [
 ];
 
 
-$pdo = new PDO("mysql:host=localhost;dbname=test", "root", "", [PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING]);
-$host = "http://localhost/alert/php/files/0.jpg";
+$pdo = sql_create_pdo();
 
 foreach($tables as $table => $fields)
 {
     sql_create_table($pdo, $table, $fields);
+  //  sql_delete_table($pdo, $table);
 }
 
 //insert into alert_files values(0, 0, "image/jpeg", "http://localhost/alert/php/files/0.jpg", "account_img");
@@ -98,4 +98,4 @@ foreach($tables as $table => $fields)
 //update alert_users set name="Qwery", surname="opa", e_mail="mail", password="pwsw", img="none" where id=1;
 //sql_update_by_id($pdo, "alert_users", 1, ["name"=>"Qwery1", "surname"=>"op1a", "e_mail"=>"ma1il", "password"=>"p1wsw", "img"=>0]);
 //set_updates($pdo, "comments", 9);
-echo (sql_select_by_id($pdo, "alert_updates", 3))["updates"];
+//echo (sql_select_by_id($pdo, "alert_updates", 3))["updates"];

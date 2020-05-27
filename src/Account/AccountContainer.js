@@ -12,7 +12,8 @@ function mapStateToProps(state)
         surname: state.account.surname,
         e_mail: state.account.e_mail,
         password: state.account.password,
-        is_auth: state.auth.is_auth
+        is_auth: state.auth.is_auth,
+        waiting: state.account.waiting
     };
 }
 

@@ -18,6 +18,13 @@ function sql_create_table($pdo, $name, $fields)
     return $res->execute();
 }
 
+function sql_delete_table($pdo, $table)
+{
+    $sql = "drop table if exists $table";
+    $res = $pdo->prepare($sql);
+    return $res->execute();
+}
+
 function sql_insert($pdo, $table, $values)
 {
     $sql = "insert into $table values (";

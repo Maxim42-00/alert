@@ -14,14 +14,16 @@ if($my_id)
     $user_id = $_GET["user_id"];
     $pdo = sql_create_pdo();
     $user = sql_select_by_id($pdo, "alert_users", $user_id);
+    if(!$user)
+    {
+        echo json_encode(["status" => "ok", "found" => "not_found", "my_id" => $my_id]);
+        exit();
+    }
     $user["img"]= get_img_of_user($pdo, $user);
     unset($user["password"]);
     unset($user["e_mail"]);
     unset($user["files"]);
-    if(!$user)
-        echo json_encode(["status" => "ok", "found" => "not_found"]);
-    else
-        echo json_encode(["status" => "ok", "data" => $user, "my_id" => $my_id, "found" => "found"]);
+    echo json_encode(["status" => "ok", "data" => $user, "my_id" => $my_id, "found" => "found"]);
 }
 else
 {

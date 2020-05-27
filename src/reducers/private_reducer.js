@@ -20,11 +20,11 @@ function private_reducer(state = default_state, action)
         new_state.waiting = false;
         if(action.status === "ok")
         {
+            new_state.cur_user_id = action.id;
             if( (new_state.found=action.found) === "found")
             {
                 new_state.name = action.data.name;
                 new_state.surname = action.data.surname;
-                new_state.cur_user_id = action.data.id;
                 new_state.img = action.data.img;
             }
         }

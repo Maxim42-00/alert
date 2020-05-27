@@ -1,4 +1,4 @@
-import App from "./App";
+import UpdateStorage from "./UpdateStorage";
 import {connect} from "react-redux";
 import get_updates_thunk from "./get_updates_thunk";
 
@@ -15,6 +15,6 @@ function mapDispatchToProps(dispatch)
     };
 }
 
-const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
+const UpdateStorageContainer = connect(mapStateToProps, mapDispatchToProps)(UpdateStorage);
 
-export default AppContainer;
+export default UpdateStorageContainer;

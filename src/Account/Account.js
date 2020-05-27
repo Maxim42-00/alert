@@ -1,6 +1,7 @@
 ﻿import React from "react";
 import "./Account.css";
 import {host} from "../host";
+import Waiting from "../Waiting/Waiting";
 
 class Account extends React.Component
 {
@@ -98,6 +99,7 @@ class Account extends React.Component
 
         return (
             <div>
+                {this.props.waiting ? <Waiting /> : ""}
                 {img}
                 <div className="account_form">
                     <input type="file" className="account_input" onChange={(e)=>this.file_change(e.target)} ref={(r)=>this.inp_form_file=r} accept="image/*" />

@@ -1,0 +1,18 @@
+[27-May-2020 00:12:44 Europe/Moscow] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+ in C:\xampp\htdocs\alert\php\sql.php:5
+Stack trace:
+#0 C:\xampp\htdocs\alert\php\sql.php(5): PDO->__construct('mysql:host=loca...', 'root', '', Array)
+#1 C:\xampp\htdocs\alert\php\is_auth.php(8): sql_create_pdo()
+#2 C:\xampp\htdocs\alert\php\get_updates.php(13): is_auth()
+#3 C:\xampp\htdocs\alert\php\get_updates.php(32): get_updates('online')
+#4 {main}
+  thrown in C:\xampp\htdocs\alert\php\sql.php on line 5
+[27-May-2020 00:12:48 Europe/Moscow] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+ in C:\xampp\htdocs\alert\php\sql.php:5
+Stack trace:
+#0 C:\xampp\htdocs\alert\php\sql.php(5): PDO->__construct('mysql:host=loca...', 'root', '', Array)
+#1 C:\xampp\htdocs\alert\php\is_auth.php(8): sql_create_pdo()
+#2 C:\xampp\htdocs\alert\php\get_updates.php(13): is_auth()
+#3 C:\xampp\htdocs\alert\php\get_updates.php(32): get_updates('online')
+#4 {main}
+  thrown in C:\xampp\htdocs\alert\php\sql.php on line 5

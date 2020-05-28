@@ -3,6 +3,7 @@
 require_once "sql.php";
 require_once "set_updates.php";
 require_once "delete_updates.php";
+require_once "get_attach_type.php";
 
 $tables = [
     "alert_users" => [
@@ -40,10 +41,6 @@ $tables = [
         "id" => "int(10) NOT NULL",
         "chats" => "text NOT NULL"
     ],
-    "alert_friends" => [
-        "id" => "int(10) NOT NULL",
-        "friend_ids_arr_json" => "text NOT NULL"
-    ],
     "alert_changes" => [
         "id" => "int(10) NOT NULL",
         "changes_arr_json" => "text NOT NULL"
@@ -70,6 +67,18 @@ $tables = [
         "id" => "int(10) NOT NULL",
         "updates" => "text NOT NULL",
         "online" => "tinytext NOT NULL"
+    ],
+    "alert_follows" => [
+        "id" => "int(10) NOT NULL",
+        "follows" => "text NOT NULL"
+    ],
+    "alert_followers" => [
+        "id" => "int(10) NOT NULL",
+        "followers" => "text NOT NULL"
+    ],
+    "alert_friends" => [
+        "id" => "int(10) NOT NULL",
+        "friends" => "text NOT NULL"
     ]
 ];
 
@@ -78,8 +87,8 @@ $pdo = sql_create_pdo();
 
 foreach($tables as $table => $fields)
 {
-  //  sql_create_table($pdo, $table, $fields);
-    sql_delete_table($pdo, $table);
+    sql_create_table($pdo, $table, $fields);
+  //  sql_delete_table($pdo, $table);
 }
 
 //insert into alert_files values(0, 0, "image/jpeg", "http://localhost/alert/php/files/0.jpg", "account_img");
@@ -101,3 +110,6 @@ foreach($tables as $table => $fields)
 //set_updates($pdo, "comments", 9);
 //echo (sql_select_by_id($pdo, "alert_updates", 3))["updates"];
 //delete_updates($pdo, 1, "comments", "2");
+//sql_update_by_id($pdo, "alert_follows", 1, ["id" => 1, "follows" => "[2]"]);
+//print_r(get_attached_users_ids($pdo, 1, "follows"));
+//echo ([] == false);

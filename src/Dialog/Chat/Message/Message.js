@@ -5,7 +5,6 @@ import Dialog from "../../Dialog";
 import timestamp_to_string from "../../../functions/timestamp_to_string";
 import RecallRef from "./RecallRef/RecallRef";
 import MsgMenuPanel from "./MsgMenuPanel/MsgMenuPanel";
-import {host} from "../../../host";
 import UserImgContainer from "../../../UserImg/UserImgContainer";
 
 class Message extends React.Component
@@ -44,17 +43,11 @@ class Message extends React.Component
             recall_backtrace = this.props.recall_backtrace.map(cur => <RecallRef msg_data={cur} params={this.props.params} add_to_recall={this.props.add_to_recall} />);
         }
 
-        let img;
-        if(this.props.img)
-            img = <img src={this.props.img} style={{padding: "5px"}} width="50" />;
-        else
-            img = <img src={host + "/alert/php/files/0.jpg"} style={{padding: "5px"}} width="50" />
-
         return (
             <div className="Message" style={recalled_style}>
                 {msg_menu_panel}
                 <div>
-                    <UserImgContainer user_id={this.props.user_id} img={this.props.img} />
+                    <UserImgContainer user_id={this.props.user_id} img={this.props.img} img_width={50} />
                     <span>
                         <span>{this.props.user_name}</span><br />
                         <span>{this.props.user_surname}</span>

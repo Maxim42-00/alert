@@ -21,7 +21,7 @@ function mapDispatchToProps(dispatch)
 function UserImgContainer(props)
 {
     const ConnectedUserImg = connect(mapStateToProps(props.user_id), mapDispatchToProps)(UserImg);
-    return <ConnectedUserImg user_id={props.user_id} img={props.img} />;
+    return <ConnectedUserImg user_id={props.user_id} img={props.img} img_width={props.img_width} />;
 }
 
 export default UserImgContainer;

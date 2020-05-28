@@ -95,7 +95,6 @@ class Account extends React.Component
         }
         else
             img = <img src={host + "/alert/php/files/0.jpg"} style={{padding: "5px"}} width="200" />
-        let input_data={name: "", surname: "", e_mail: "", password: ""};
 
         return (
             <div>

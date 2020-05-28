@@ -12,7 +12,7 @@ function get_updates_thunk(online, display, users_ids)
         fetch(host + "/alert/php/get_updates.php", {method: "POST", body: form_data, credentials: "include"})
             .then(data=>data.json())
             .then(data=>{
-console.log(data);
+console.log("update_data: ", data);
                 if(data.status === "ok")
                 {
                     dispatch({type: "USER_ID_TO_ONLINE", user_id_to_online: data.user_id_to_online});
@@ -29,6 +29,14 @@ console.log(data);
                     }
                     else
                         dispatch({type: "UPDATES_FOR_MENU", update: "comments", ids: []});
+
+                    if(data.updates.followers)
+                    {
+                        let updates_for_menu = data.updates.followers;
+                        dispatch({type: "UPDATES_FOR_MENU", update: "followers", ids: updates_for_menu});
+                    }
+                    else
+                        dispatch({type: "UPDATES_FOR_MENU", update: "followers", ids: []});
                 }
             });
     }

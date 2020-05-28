@@ -1,5 +1,7 @@
 <?php
 
+require_once "array_to_list.php";
+
 function delete_updates($pdo, $user_id, $update_type, $target_id)
 {
     $updates_record = sql_select_by_id($pdo, "alert_updates", $user_id);
@@ -13,6 +15,7 @@ function delete_updates($pdo, $user_id, $update_type, $target_id)
     {
         if(($key = array_search($target_id, $updates[$update_type])) === false) return 0;
         unset($updates[$update_type][$key]);
+        $updates[$update_type] = array_to_list($updates[$update_type]);
         if(count($updates[$update_type]) === 0)
             unset($updates[$update_type]);
     }

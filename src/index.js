@@ -12,6 +12,7 @@ import private_reducer from "./reducers/private_reducer";
 import new_message_reducer from "./reducers/new_message_reducer";
 import account_reducer from "./reducers/account_reducer";
 import update_storage_reducer from "./reducers/update_storage_reducer";
+import users_reducer from "./reducers/users_reducer";
 
 const reducers = combineReducers({
     auth: auth_reducer,
@@ -20,7 +21,8 @@ const reducers = combineReducers({
     private: private_reducer,
     new_message: new_message_reducer,
     account: account_reducer,
-    update_storage: update_storage_reducer
+    update_storage: update_storage_reducer,
+    users: users_reducer
 });
 
 let store = createStore(reducers, applyMiddleware(thunk));

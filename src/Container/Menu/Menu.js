@@ -6,7 +6,7 @@ class Menu extends React.Component
 {
     render()
     {
-        let number_of_updates = this.props.number_of_comments;
+        let number_of_updates = this.props.number_of_comments + this.props.number_of_followers;
         let updates_label = "";
         if(number_of_updates)
         {

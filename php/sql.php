@@ -163,3 +163,11 @@ function sql_update_by_id($pdo, $table, $id, $values)
     $res = $pdo->prepare($sql);
     return $res->execute();
 }
+
+function sql_fetch_users($pdo)
+{
+    $sql = "select id, name, surname, files from alert_users";
+    $res = $pdo->prepare($sql);
+    $res->execute();
+    return $res->fetchAll(PDO::FETCH_ASSOC);
+}

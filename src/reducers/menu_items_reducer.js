@@ -1,6 +1,10 @@
 ﻿let default_state = {
     menu_items: [
         {
+            name: "Пользователи",
+            src: "/users"
+        },
+        {
             name: "Аккаунт",
             src: "/account"
         }

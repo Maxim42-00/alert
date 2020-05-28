@@ -1,6 +1,7 @@
 const default_state = {
     comments: [],
-    user_id_to_online: []
+    user_id_to_online: [],
+    followers: []
 };
 
 function app_reducer(state = default_state, action)

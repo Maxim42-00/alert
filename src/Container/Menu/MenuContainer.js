@@ -6,7 +6,8 @@ function mapStateToProps(state)
     return {
         menu_items: state.menu.menu_items,
         my_id: state.auth.my_id,
-        number_of_comments: state.update_storage.comments.length
+        number_of_comments: state.update_storage.comments.length,
+        number_of_followers: state.update_storage.followers.length
     };
 }
 

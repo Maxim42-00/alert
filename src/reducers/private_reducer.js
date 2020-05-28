@@ -4,7 +4,10 @@ const default_state = {
     img: "",
     waiting: false,
     found: "",
-    cur_user_id: ""
+    cur_user_id: "",
+
+    is_show_contacts_wnd: false,
+    attach_type: ""
 };
 
 function private_reducer(state = default_state, action)
@@ -28,6 +31,12 @@ function private_reducer(state = default_state, action)
                 new_state.img = action.data.img;
             }
         }
+        return new_state;
+    }
+    if(action.type === "SHOW_CONTACTS_WND")
+    {
+        new_state.is_show_contacts_wnd = action.show;
+        new_state.attach_type = action.attach_type;
         return new_state;
     }
     return state;

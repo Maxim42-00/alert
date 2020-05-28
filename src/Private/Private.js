@@ -3,6 +3,7 @@ import Waiting from "../Waiting/Waiting";
 import "./Private.css";
 import Dialog from "../Dialog/Dialog";
 import {host} from "../host";
+import MyContactsContainer from "./MyContacts/MyContactsContainer";
 
 class Private extends React.Component
 {
@@ -54,6 +55,7 @@ class Private extends React.Component
                         <span className="private_field"> {this.props.surname} </span>
                     </div>
                     <div>{img}</div>
+                    <MyContactsContainer params={{user_id: this.props.match.params.user_id}} />
                 </div>
                 <Dialog params={{type: "posts", user_id: this.props.match.params.user_id}}  my_id={this.props.my_id} />
             </div>

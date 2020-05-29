@@ -1,7 +1,7 @@
 import {host} from "../host";
 import load_users_thunk from "./load_users_thunk";
 
-function attach_thunk(attach_type, user_id, params)
+function attach_thunk(attach_type, user_id, params="")
 {
     return function(dispatch)
     {
@@ -18,8 +18,10 @@ function attach_thunk(attach_type, user_id, params)
         fetch(host + "/alert/php/attach.php", {method: "POST", body: form_data, credentials: "include"})
             .then(data=>data.json())
             .then(data=>{
-console.log("attach_thunk: ", data);
-                dispatch(load_users_thunk(params));
+                if(params)
+                    dispatch(load_users_thunk(params));
+                else
+                    dispatch({type: "PRIVATE_ATTACH_TYPE", attach_type: data.attach_type});
             });
     };
 }

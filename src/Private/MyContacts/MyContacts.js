@@ -7,11 +7,12 @@ class MyContacts extends React.Component
     render()
     {
         let followers = "followers";
-        let friends = "friends";
-
         if(this.props.number_of_followers)
             followers = this.props.number_of_followers + " new followers";
-        
+
+        let friends = "friends";
+        if(this.props.number_of_friends)
+            friends = this.props.number_of_friends + " new friends";
 
         let contacts_wnd ="";
         if(this.props.is_show_contacts_wnd)

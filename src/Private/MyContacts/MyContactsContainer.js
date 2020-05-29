@@ -5,8 +5,9 @@ function mapStateToProps(state)
 {
     return {
         is_show_contacts_wnd: state.private.is_show_contacts_wnd,
-        attach_type: state.private.attach_type,
-        number_of_followers: state.update_storage.followers.length
+        attach_type: state.private.contacts_wnd_attach_type,
+        number_of_followers: state.update_storage.followers.length,
+        number_of_friends: state.update_storage.friends.length
     };
 }
 

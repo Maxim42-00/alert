@@ -1,1 +1,1 @@
-unfollow 3
+delete_friend 3

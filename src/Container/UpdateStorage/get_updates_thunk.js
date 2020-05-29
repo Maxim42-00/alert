@@ -16,6 +16,7 @@ console.log("update_data: ", data);
                 if(data.status === "ok")
                 {
                     dispatch({type: "USER_ID_TO_ONLINE", user_id_to_online: data.user_id_to_online});
+/*
                     if(data.updates.comments)
                     {
                         let updates_for_menu = [];
@@ -37,6 +38,14 @@ console.log("update_data: ", data);
                     }
                     else
                         dispatch({type: "UPDATES_FOR_MENU", update: "followers", ids: []});
+*/
+
+                    let updates_for_menu = {};
+                    for(let key in data.updates)
+                    {
+                        updates_for_menu[key] = data.updates[key];
+                    }
+                    dispatch({type: "UPDATES_FOR_MENU", updates_for_menu: updates_for_menu});
                 }
             });
     }

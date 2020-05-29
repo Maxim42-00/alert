@@ -4,7 +4,7 @@ require "array_to_list.php";
 
 function set_attach_type($pdo, $my_id, $user_id, $attach_type)
 {
-    if(($attach_type === "follows") || ($attach_type === "followers"))
+    if(($attach_type === "follows") || ($attach_type === "followers") || ($attach_type === "friends"))
     {
         $attached_users = get_attached_users_ids($pdo, $my_id, $attach_type);
         if($attached_users === false)

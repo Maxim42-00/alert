@@ -12,6 +12,8 @@ class Users extends React.Component
         {
             if(this.props.attach_type === "none") attach_btn_value="Follow";
             if(this.props.attach_type === "follows") attach_btn_value="UnFollow";
+            if(this.props.attach_type === "followers") attach_btn_value="Add Friend";
+            if(this.props.attach_type === "friends") attach_btn_value="Delete Friend";
             attach_btn = <div className="attach_btn" onClick={()=>this.props.attach(this.props.attach_type, this.props.user_id, this.props.params)}> {attach_btn_value} </div>
         }
         return (

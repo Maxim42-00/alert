@@ -18,14 +18,14 @@ function set_updates($pdo, $my_id, $msg_type, $target_id)
         $updates_json = json_encode($updates);
         sql_update_by_id($pdo, "alert_updates", $user_id, ["updates" => $updates_json]);
     }
-    if($msg_type === "followers")
+    if(($msg_type === "followers") || ($msg_type === "friends"))
     {
         $updates_json = (sql_select_by_id($pdo, "alert_updates", $my_id))["updates"];
         $updates = json_decode($updates_json, true);
-        if(isset($updates["followers"]))
-            if(in_array($target_id, $updates["followers"]))
+        if(isset($updates[$msg_type]))
+            if(in_array($target_id, $updates[$msg_type]))
                 return;
-        $updates["followers"][] = $target_id;
+        $updates[$msg_type][] = $target_id;
         $updates_json = json_encode($updates);
         sql_update_by_id($pdo, "alert_updates", $my_id, ["updates" => $updates_json]);
     }

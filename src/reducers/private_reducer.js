@@ -5,9 +5,10 @@ const default_state = {
     waiting: false,
     found: "",
     cur_user_id: "",
+    attach_type: "",
 
     is_show_contacts_wnd: false,
-    attach_type: ""
+    contacts_wnd_attach_type: "",
 };
 
 function private_reducer(state = default_state, action)
@@ -29,6 +30,7 @@ function private_reducer(state = default_state, action)
                 new_state.name = action.data.name;
                 new_state.surname = action.data.surname;
                 new_state.img = action.data.img;
+                new_state.attach_type = action.data.attach_type;
             }
         }
         return new_state;
@@ -36,7 +38,22 @@ function private_reducer(state = default_state, action)
     if(action.type === "SHOW_CONTACTS_WND")
     {
         new_state.is_show_contacts_wnd = action.show;
+        new_state.contacts_wnd_attach_type = action.attach_type;
+        return new_state;
+    }
+    if(action.type === "PRIVATE_ATTACH_TYPE")
+    {
         new_state.attach_type = action.attach_type;
+        return new_state;
+    }
+    if(action.type === "PRIVATE_UNMOUNT")
+    {
+        new_state.name = "";
+        new_state.surname = "";
+        new_state.img = "";
+        new_state.found = "";
+        new_state.cur_user_id = "";
+        new_state.attach_type = "";
         return new_state;
     }
     return state;

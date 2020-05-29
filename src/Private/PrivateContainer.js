@@ -20,7 +20,9 @@ function mapStateToProps(state)
 function mapDispatchToProps(dispatch)
 {
     return {
-        load_private_data: (id)=>dispatch(load_private_data_thunk(id))
+        load_private_data: (id)=>dispatch(load_private_data_thunk(id)),
+        hide_contacts_wnd: ()=>dispatch({type: "SHOW_CONTACTS_WND", show: false, attach_type: ""}),
+        private_unmount: ()=>dispatch({type: "PRIVATE_UNMOUNT"})
     };
 }
 

@@ -4,6 +4,8 @@ import "./Private.css";
 import Dialog from "../Dialog/Dialog";
 import {host} from "../host";
 import MyContactsContainer from "./MyContacts/MyContactsContainer";
+import AttachBtnContainer from "./AttachBtn/AttachBtnContainer";
+import OnlineStatusContainer from "./OnlineStatus/OnlineStatusContainer";
 
 class Private extends React.Component
 {
@@ -28,6 +30,11 @@ class Private extends React.Component
         }
         if(this.props.cur_user_id !== this.props.match.params.user_id)
             this.props.load_private_data(this.props.match.params.user_id);
+        this.props.hide_contacts_wnd();
+    }
+    componentWillUnmount()
+    {
+        this.props.private_unmount();
     }
     render()
     {
@@ -53,8 +60,12 @@ class Private extends React.Component
                     <div>
                         <span className="private_field"> {this.props.name} </span>
                         <span className="private_field"> {this.props.surname} </span>
+                        <OnlineStatusContainer user_id={this.props.match.params.user_id} />
                     </div>
-                    <div>{img}</div>
+                    <div>
+                        {img}
+                        <AttachBtnContainer user_id={this.props.match.params.user_id} />
+                    </div>
                     <MyContactsContainer params={{user_id: this.props.match.params.user_id}} />
                 </div>
                 <Dialog params={{type: "posts", user_id: this.props.match.params.user_id}}  my_id={this.props.my_id} />

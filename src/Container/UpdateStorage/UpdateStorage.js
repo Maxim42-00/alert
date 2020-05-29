@@ -20,6 +20,9 @@ class UpdateStorage extends React.Component
                 users_ids = this.props.chat_users_ids;
             if(this.props.users_ids.length)
                 users_ids = this.props.users_ids;
+            if(this.props.private_cur_user_id)
+                if(users_ids.indexOf(this.props.private_cur_user_id) === -1)
+                    users_ids.push(this.props.private_cur_user_id);
             this.props.get_updates("online", display, users_ids);
         }
     }

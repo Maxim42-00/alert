@@ -113,3 +113,8 @@ foreach($tables as $table => $fields)
 //sql_update_by_id($pdo, "alert_follows", 1, ["id" => 1, "follows" => "[2]"]);
 //print_r(get_attached_users_ids($pdo, 1, "follows"));
 //echo ([] == false);
+/*
+echo "<pre>";
+print_r( sql_select_by_ids($pdo, "alert_users", [1,2,3,4,5]) );
+echo "</pre>";
+*/

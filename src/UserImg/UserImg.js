@@ -1,6 +1,7 @@
 import React from "react";
 import "./UserImg.css";
 import {host} from "../host";
+import {NavLink} from "react-router-dom";
 
 class UserImg extends React.Component
 {
@@ -18,7 +19,9 @@ class UserImg extends React.Component
 
         return (
             <span className="UserImg">
+                <NavLink to={"/alert/private/" + this.props.user_id}>
                 {img}
+                </NavLink>
                 {online_label}
             </span>
         );

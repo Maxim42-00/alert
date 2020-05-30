@@ -26,6 +26,7 @@ class Private extends React.Component
     {
         if(this.props.is_auth === false)
         {
+console.log("redirect___");
             this.redirect_to_login();
         }
         if(this.props.cur_user_id !== this.props.match.params.user_id)

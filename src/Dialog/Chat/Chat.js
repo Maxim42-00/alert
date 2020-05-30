@@ -15,6 +15,9 @@ class Chat extends React.Component
     }
     componentDidUpdate()
     {
+        if(this.props.is_auth === false)
+            this.props.history.push("/alert/login");
+
         if(this.props.params.type === "chat")
         {
             setTimeout(this.scroll_down, 1000);

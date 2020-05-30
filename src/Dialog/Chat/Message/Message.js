@@ -13,7 +13,7 @@ class Message extends React.Component
     {
         let files;
         if(this.props.files)
-            files = this.props.files.map(file => <Media type={file.type} url={file.url} m_type={this.props.params.type} />);
+            files = this.props.files.map(file => <Media f_type={file.type} url={file.url} m_type={this.props.params.type} />);
 
         let recall;
         if(this.props.recall !== "none")
@@ -61,7 +61,7 @@ class Message extends React.Component
                     {files}
                 </div>
                 {recall_backtrace}
-                { (this.props.params.type === "posts" && !this.props.recalled_msg && !this.props.recall_window) ? <Dialog params={{type: "comments", post_id: this.props.message_id}} /> : "" }
+                { ((this.props.params.type === "posts" || this.props.params.type === "news") && !this.props.recalled_msg && !this.props.recall_window) ? <Dialog params={{type: "comments", post_id: this.props.message_id}} /> : "" }
             </div>
         );
     }

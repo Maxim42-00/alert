@@ -30,11 +30,12 @@ class Dialog extends React.Component
             style.width = "80%";
         }
         let content;
-        if(this.props.params.type === "posts")
+        if((this.props.params.type === "posts") || (this.props.params.type === "news"))
         {
             content = 
             [
-                (this.props.params.user_id === this.props.my_id ? <NewMessageContainer params={this.props.params} /> : ""),
+                ((this.props.params.user_id === this.props.my_id) && (this.props.params.type !== "news") 
+                    ? <NewMessageContainer params={this.props.params} /> : ""),
                 <ChatContainer params={this.props.params} />
             ];
         }

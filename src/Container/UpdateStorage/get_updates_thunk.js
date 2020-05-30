@@ -16,29 +16,6 @@ console.log("update_data: ", data);
                 if(data.status === "ok")
                 {
                     dispatch({type: "USER_ID_TO_ONLINE", user_id_to_online: data.user_id_to_online});
-/*
-                    if(data.updates.comments)
-                    {
-                        let updates_for_menu = [];
-                        for(let key in data.updates.comments)
-                        {
-                            let update_comment_id = data.updates.comments[key];
-                            if(display.comments.indexOf(update_comment_id) === -1)
-                                    updates_for_menu.push(update_comment_id);
-                        }
-                        dispatch({type: "UPDATES_FOR_MENU", update: "comments", ids: updates_for_menu});
-                    }
-                    else
-                        dispatch({type: "UPDATES_FOR_MENU", update: "comments", ids: []});
-
-                    if(data.updates.followers)
-                    {
-                        let updates_for_menu = data.updates.followers;
-                        dispatch({type: "UPDATES_FOR_MENU", update: "followers", ids: updates_for_menu});
-                    }
-                    else
-                        dispatch({type: "UPDATES_FOR_MENU", update: "followers", ids: []});
-*/
 
                     let updates_for_menu = {};
                     for(let key in data.updates)

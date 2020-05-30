@@ -2,6 +2,7 @@ const default_state = {
     posts: [],
     comments: {},
     chat: [],
+    news: [],
 
     comments_displayed: [],
     users_ids: []
@@ -28,6 +29,7 @@ function get_users_ids_from_messages(new_state)
 {
     let users_ids = [];
     add_user_ids_from_messages(users_ids, new_state.posts);
+    add_user_ids_from_messages(users_ids, new_state.news);
     for(let key in new_state.comments)
     {
         let comments = new_state.comments[key];
@@ -41,11 +43,11 @@ function chat_reducer(state = default_state, action)
     let new_state = {...state};
     if(action.type === "LOAD_MESSAGES")
     {
-        if(action.params.type === "posts")
+        if((action.params.type === "posts") || (action.params.type === "news"))
         {
-            if(state.posts.length === action.messages.length)
+            if(state[action.params.type].length === action.messages.length)
                 return state;
-            new_state.posts = [...action.messages];
+            new_state[action.params.type] = [...action.messages];
         }
         if(action.params.type === "comments")
         {

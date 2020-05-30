@@ -18,6 +18,11 @@ class Users extends React.Component
     {
         this.load_users();
     }
+    componentDidUpdate()
+    {
+        if(!this.props.is_auth && !this.props.waiting)
+            this.props.history.push("/alert/login");
+    }
     componentWillUnmount()
     {
         this.props.delete_users();

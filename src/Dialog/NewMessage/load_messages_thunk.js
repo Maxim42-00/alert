@@ -36,7 +36,10 @@ function load_messages_thunk(params, input={}, msg_for_recall="", query_params={
             .then(data=>data.json())
             .then(data=>{
                 if(data.status === "ok")
+                {
+                    dispatch({type: "SET_AUTH", auth: data.status, my_id: data.my_id});
                     dispatch({type: "LOAD_MESSAGES", messages: data.data, params});
+                }
                 else
                     dispatch({type: "SET_AUTH", auth: data.status});
             });

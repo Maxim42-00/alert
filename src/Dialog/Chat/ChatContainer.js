@@ -10,13 +10,14 @@ function mapStateToProps(params)
     return function(state)
     {
         let data;
-        if((params.type === "posts") || (params.type === "chat"))
+        if((params.type === "posts") || (params.type === "chat") || (params.type === "news"))
             data = state.chat[params.type];
         if(params.type === "comments")
             data = state.chat[params.type][params.post_id];
         return {
             messages: data,
-            my_id: state.auth.my_id
+            my_id: state.auth.my_id,
+            is_auth: state.auth.is_auth
         };
     }
 }

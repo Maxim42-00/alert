@@ -15,5 +15,7 @@
 .recall_window_content
 {
     width: 80%;
+    max-height: 80%;
+    overflow: auto;
     background-color: lightgray;
 }

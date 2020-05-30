@@ -14,8 +14,12 @@ class UserImg extends React.Component
             img = <img src={host + "/alert/php/files/0.jpg"} style={{padding: "5px"}} width={this.props.img_width} />
 
         let online_label = "";
+        const label_style = {
+            width: (this.props.img_width/3) + "px",
+            height: (this.props.img_width/3) + "px"
+        };
         if(this.props.online === "online")
-            online_label = <div className="online_label"> </div>;
+            online_label = <div className="online_label" style={label_style}> </div>;
 
         return (
             <span className="UserImg">

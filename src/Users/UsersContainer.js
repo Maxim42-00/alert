@@ -2,6 +2,7 @@ import Users from "./Users";
 import {connect} from "react-redux";
 import load_users_thunk from "./load_users_thunk";
 import attach_thunk from "./attach_thunk";
+import {withRouter} from "react-router-dom";
 
 function mapStateToProps(state)
 {
@@ -21,6 +22,7 @@ function mapDispatchToProps(dispatch)
     };
 }
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
+const UsersWithRouter = withRouter(Users);
+const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersWithRouter);
 
 export default UsersContainer;

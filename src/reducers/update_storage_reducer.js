@@ -2,7 +2,8 @@ const default_state = {
     comments: [],
     user_id_to_online: [],
     followers: [],
-    friends: []
+    friends: [],
+    news: []
 };
 
 function app_reducer(state = default_state, action)
@@ -14,6 +15,7 @@ function app_reducer(state = default_state, action)
         new_state.followers = [];
         new_state.follows = [];
         new_state.friends = [];
+        new_state.news = [];
 
         for(let key in action.updates_for_menu)
             new_state[key] = action.updates_for_menu[key];

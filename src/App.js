@@ -7,6 +7,7 @@ import AuthContainer from "./Auth/AuthContainer";
 import PrivateContainer from "./Private/PrivateContainer";
 import AccountContainer from "./Account/AccountContainer";
 import UsersContainer from "./Users/UsersContainer";
+import News from "./News/News";
 
 class App extends React.Component
 {
@@ -20,6 +21,7 @@ class App extends React.Component
                 <Route path="/alert/private/:user_id" render={()=><Container> <PrivateContainer /> </Container>} />
                 <Route path="/alert/account" render={()=><Container> <AccountContainer /> </Container>} />
                 <Route path="/alert/users" render={()=><Container> <UsersContainer params={{attach_type: "none"}} /> </Container>} />
+                <Route path="/alert/news" render={()=><Container> <News /> </Container>} />
             </div>
         );
     }

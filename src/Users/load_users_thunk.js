@@ -13,7 +13,6 @@ function load_users_thunk(params)
         fetch(host + "/alert/php/load_users.php", {method: "POST", body: form_data, credentials: "include"})
             .then(data=>data.json())
             .then(data=>{
-console.log("load_users", data);
                 dispatch({type: "SET_AUTH", auth: data.status, my_id: data.my_id});
                 dispatch({type: "USERS_RECEIVED", users: data.users});
             });

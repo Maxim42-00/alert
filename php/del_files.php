@@ -3,7 +3,7 @@
 function del_files($pdo, $record)
 {
     $files_ids = json_decode($record["files"], true);
-    $files = sql_select_by_ids($pdo, "alert_files", $files_ids);
+    $files = sql_select_by_ids($pdo, "alert_files", "id", $files_ids);
 
     foreach($files as $file)
     {

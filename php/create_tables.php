@@ -23,9 +23,13 @@ $tables = [
         "files" => "text NOT NULL",
         "recall" => "tinytext NOT NULL"
     ],
-    "alert_chat_ids" => [
+    "alert_chats" => [
         "id" => "int(10) AUTO_INCREMENT PRIMARY KEY NOT NULL",
-        "users" => "text NOT NULL"
+        "user_id" => "int(10) NOT NULL",
+        "chat_name" => "tinytext NOT NULL",
+        "participants" => "text NOT NULL",
+        "last_update" => "tinytext NOT NULL",
+        "inviters" => "text NOT NULL"
     ],
     "alert_messages" => [
         "id" => "int(10) AUTO_INCREMENT PRIMARY KEY NOT NULL",
@@ -37,13 +41,9 @@ $tables = [
         "files" => "text NOT NULL",
         "recall" => "tinytext NOT NULL"
     ],
-    "alert_user_chats" => [
+    "alert_my_chats" => [
         "id" => "int(10) NOT NULL",
         "chats" => "text NOT NULL"
-    ],
-    "alert_changes" => [
-        "id" => "int(10) NOT NULL",
-        "changes_arr_json" => "text NOT NULL"
     ],
     "alert_comments" => [
         "id" => "int(10) AUTO_INCREMENT PRIMARY KEY NOT NULL",
@@ -115,6 +115,6 @@ foreach($tables as $table => $fields)
 //echo ([] == false);
 /*
 echo "<pre>";
-print_r( sql_select_by_ids($pdo, "alert_users", [1,2,3,4,5]) );
+print_r( sql_select($pdo, "alert_users", "e_mail", "mg42ms1") );
 echo "</pre>";
 */

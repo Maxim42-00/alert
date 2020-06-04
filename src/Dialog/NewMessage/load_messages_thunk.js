@@ -23,6 +23,8 @@ function load_messages_thunk(params, input={}, msg_for_recall="", query_params={
         }
         if(params.type === "comments")
             form_data.append("post_id", params.post_id);
+        if(params.type === "messages")
+            form_data.append("chat_id", params.chat_id);
 
         fetch_obj = {method: "POST", body: form_data, credentials: "include"};
 

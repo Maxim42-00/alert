@@ -62,7 +62,7 @@ function sql_select_by_id($pdo, $table, $id)
 
 function sql_select($pdo, $table, $field, $value)
 {
-    $sql = "select * from $table where $field=$value";
+    $sql = "select * from $table where $field='$value'";
     $res = $pdo->prepare($sql);
     $res->execute();
     return $res->fetchAll(PDO::FETCH_ASSOC);
@@ -71,6 +71,22 @@ function sql_select($pdo, $table, $field, $value)
 function sql_fetch_posts($pdo, $user_id)
 {
     $sql = "select * from alert_posts where user_id=$user_id order by date desc";
+    $res = $pdo->prepare($sql);
+    $res->execute();
+    return $res->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function sql_fetch_chats($pdo, $chats_ids)
+{
+    if(count($chats_ids) === 0)
+        return [];
+    $sql = "select * from alert_chats where";          
+    foreach($chats_ids as $chat_id)
+    {
+        $sql = $sql . " id=$chat_id or";
+    }
+    $sql = rtrim($sql, "or");
+    $sql = $sql . " order by last_update desc";
     $res = $pdo->prepare($sql);
     $res->execute();
     return $res->fetchAll(PDO::FETCH_ASSOC);
@@ -113,21 +129,34 @@ function sql_insert_file($pdo, $user_id, $type, $host_path, $file_name, $target)
     return ["id" => $file_id, "extension" => $extension];
 }
 
+function sql_last_id($pdo, $table)
+{
+    $sql = "select id from $table order by id desc limit 1";
+    $res = $pdo->prepare($sql);
+    $res->execute();
+    $last_record = $res->fetch(PDO::FETCH_ASSOC);
+    if(!$last_record)
+        return 0;
+    $last_id = $last_record["id"];
+    return $last_id;
+}
 
-function sql_select_by_ids($pdo, $table, $ids)
+
+function sql_select_by_ids($pdo, $table, $id_name, $ids)
 {
     if(count($ids) === 0)
         return [];
     $sql = "select * from $table where";
     foreach($ids as $id)
     {
-        $sql = $sql . " id=$id or";
+        $sql = $sql . " $id_name=$id or";
     }
     $sql = rtrim($sql, " or");
     $res = $pdo->prepare($sql);
     $res->execute();
     return $res->fetchAll(PDO::FETCH_ASSOC);
 }
+
 
 function sql_delete_by_ids($pdo, $table, $ids)
 {

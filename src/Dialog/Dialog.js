@@ -21,9 +21,9 @@ class Dialog extends React.Component
     render()
     {
         const style = {};
-        if(this.props.params.type === "chat")
+        if(this.props.params.type === "messages")
         {
-            style.height = "calc(100% - 25px)";
+            style.height = "100%";
         }
         if(this.props.params.type === "comments")
         {

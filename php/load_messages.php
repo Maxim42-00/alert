@@ -8,6 +8,7 @@ require_once "msg_is_deletable.php";
 require_once "set_updates.php";
 require_once "delete_updates.php";
 require_once "access_allow_origin.php";
+require_once "news.php";
 
 function recall_backtrace($pdo, $recall_json)
 {
@@ -25,7 +26,7 @@ function recall_backtrace($pdo, $recall_json)
     $recall["name"] = $user["name"];
     $recall["surname"] = $user["surname"];
     $recall["img"] = get_img_of_user($pdo, $user);
-    $recall["files"] = sql_select_by_ids($pdo, "alert_files", json_decode($recall["files"], true));
+    $recall["files"] = sql_select_by_ids($pdo, "alert_files", "id", json_decode($recall["files"], true));
     $recall["msg_type"] = $type;
     $message["deletable"] = false;
 
@@ -43,7 +44,7 @@ function get_recall($pdo, $recall_json)
     $recall = sql_select_by_id($pdo, "alert_" . $recall["type"], $recall["id"]);
     if(!$recall)
         return "none";
-    $recall["files"] = sql_select_by_ids($pdo, "alert_files", json_decode($recall["files"], true));
+    $recall["files"] = sql_select_by_ids($pdo, "alert_files", "id", json_decode($recall["files"], true));
 
     $user = sql_select_by_id($pdo, "alert_users", $recall["user_id"]);
     $recall["name"] = $user["name"];
@@ -87,37 +88,66 @@ if($my_id)
         if(!isset($files)) $files = [];
         if(!isset($recall)) $recall = "none";
         if(!isset($text)) $text = " ";
+        $text = addslashes($text);
         if($msg_type === "posts")
             $values = ["null", $my_id, $time, $_SERVER["REMOTE_ADDR"], $text, json_encode($files, JSON_UNESCAPED_UNICODE), $recall];
         if($msg_type === "comments")
             $values = ["null", $my_id, $_POST["post_id"], $time, $_SERVER["REMOTE_ADDR"], $text, json_encode($files, JSON_UNESCAPED_UNICODE), $recall];
+        if($msg_type === "messages")
+            $values = ["null", $my_id, $_POST["chat_id"], $time, $_SERVER["REMOTE_ADDR"], $text, json_encode($files, JSON_UNESCAPED_UNICODE), $recall];
         sql_insert($pdo, "alert_" . $msg_type, $values);
 
         if($msg_type === "comments")
             set_updates($pdo, $my_id, $msg_type, $_POST["post_id"]);
+        if($msg_type === "posts")
+            set_news_updates($pdo, $my_id);
+        if($msg_type === "messages")
+        {
+            $chat_participants = json_decode((sql_select_by_id($pdo, "alert_chats", $_POST["chat_id"]))["participants"], true);
+            $key = array_search($my_id, $chat_participants);
+            unset($chat_participants[$key]);
+            foreach($chat_participants as $chat_participant)
+                set_updates($pdo, $chat_participant, $msg_type, $_POST["chat_id"]);
+            sql_update_by_id($pdo, "alert_chats", $_POST["chat_id"], ["last_update" => $time]);
+        }
     }
 
+    if($msg_type === "news")
+    {
+        $messages = get_news($pdo, $my_id);
+        delete_updates($pdo, $my_id, "news", "all");
+    }
     if($msg_type === "posts")
+    {
         $messages = sql_fetch_posts($pdo, $user_id);
+        delete_updates($pdo, $my_id, "news", $user_id);
+    }
     if($msg_type === "comments")
     {
         $messages = sql_fetch_comments($pdo, $_POST["post_id"]);
         delete_updates($pdo, $my_id, $msg_type, $_POST["post_id"]);
     }
+    if($msg_type === "messages")
+    {
+        $messages = sql_select($pdo, "alert_messages", "chat_id", $_POST["chat_id"]);
+        delete_updates($pdo, $my_id, $msg_type, $_POST["chat_id"]);
+        delete_updates($pdo, $my_id, "del_message", "all");
+    }
     foreach($messages as &$message)
     {
-        $message["files"] = sql_select_by_ids($pdo, "alert_files", json_decode($message["files"], true));
+        $message["files"] = sql_select_by_ids($pdo, "alert_files", "id", json_decode($message["files"], true));
         $user = sql_select_by_id($pdo, "alert_users", $message["user_id"]);
         $message["name"] = $user["name"];
         $message["surname"] = $user["surname"];
         $message["img"] = get_img_of_user($pdo, $user);
         $message["recall"] = get_recall($pdo, $message["recall"]);
-        $message["msg_type"] = $msg_type;
+        if($msg_type === "news") $message["msg_type"] = "posts";
+        else $message["msg_type"] = $msg_type;
         $message["deletable"] = msg_is_deletable($pdo, $message, $msg_type, $my_id);
     }
 
     
-    echo json_encode(["status" => "ok", "data" => $messages]);
+    echo json_encode(["status" => "ok", "data" => $messages, "my_id" => $my_id]);
 
 }
 else

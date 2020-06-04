@@ -9,9 +9,9 @@ class UserImg extends React.Component
     {
         let img;
         if(this.props.img)
-            img = <img src={this.props.img} style={{padding: "5px"}} width={this.props.img_width} />;
+            img = <img src={this.props.img} width={this.props.img_width} />;
         else
-            img = <img src={host + "/alert/php/files/0.jpg"} style={{padding: "5px"}} width={this.props.img_width} />
+            img = <img src={host + "/alert/php/files/0.jpg"} width={this.props.img_width} />
 
         let online_label = "";
         const label_style = {

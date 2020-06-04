@@ -3,8 +3,10 @@ const default_state = {
     comments: {},
     chat: [],
     news: [],
+    messages: [],
 
     comments_displayed: [],
+    chat_displayed: "",
     users_ids: []
 };
 
@@ -30,6 +32,7 @@ function get_users_ids_from_messages(new_state)
     let users_ids = [];
     add_user_ids_from_messages(users_ids, new_state.posts);
     add_user_ids_from_messages(users_ids, new_state.news);
+    add_user_ids_from_messages(users_ids, new_state.messages);
     for(let key in new_state.comments)
     {
         let comments = new_state.comments[key];
@@ -43,7 +46,7 @@ function chat_reducer(state = default_state, action)
     let new_state = {...state};
     if(action.type === "LOAD_MESSAGES")
     {
-        if((action.params.type === "posts") || (action.params.type === "news"))
+        if((action.params.type === "posts") || (action.params.type === "news") || (action.params.type === "messages"))
         {
             if(state[action.params.type].length === action.messages.length)
                 return state;
@@ -59,6 +62,7 @@ function chat_reducer(state = default_state, action)
             new_state.comments[action.params.post_id] = [...action.messages];
         }
         new_state.comments_displayed = get_comments_keys(new_state.comments);
+        new_state.chat_displayed = action.params.chat_id;
 
         new_state.users_ids = get_users_ids_from_messages(new_state);
     }
@@ -72,6 +76,7 @@ function chat_reducer(state = default_state, action)
         else
             new_state[action.param_type] = [];
 
+        new_state.chat_displayed = "";
         new_state.users_ids = get_users_ids_from_messages(new_state);
     }
     return new_state;

@@ -4,8 +4,8 @@ require_once "access_allow_origin.php";
 require_once "sql.php";
 require_once "is_auth.php";
 require_once "accept_files.php";
-require "del_files.php";
-require "get_img_of_user.php";
+require_once "del_files.php";
+require_once "get_img_of_user.php";
 
 
 $my_id = is_auth();

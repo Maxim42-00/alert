@@ -26,7 +26,7 @@ function get_users($pdo, $my_id, $user_id, $attach_type)
         $users_ids = get_attached_users_ids($pdo, $user_id, $attach_type);
         if(!$users_ids)
             return [];
-        $users = sql_select_by_ids($pdo, "alert_users", $users_ids);
+        $users = sql_select_by_ids($pdo, "alert_users", "id", $users_ids);
     }
 
     foreach($users as &$user)
@@ -61,6 +61,7 @@ if($my_id)
         delete_updates($pdo, $my_id, $attach_type, "all");
     }
 
+    $users = array_reverse($users);
     echo json_encode(["status" => "ok", "my_id" => $my_id, "users" => $users]);
 }
 else

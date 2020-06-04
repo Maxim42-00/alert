@@ -3,9 +3,10 @@
 require_once "sql.php";
 require_once "is_auth.php";
 require_once "accept_files.php";
-require "del_files.php";
+require_once "del_files.php";
 require_once "msg_is_deletable.php";
 require_once "access_allow_origin.php";
+require_once "set_updates.php";
 
 $my_id = is_auth();
 
@@ -31,6 +32,16 @@ function del_msg($pdo, $msg_type, $msg_id)
         del_files($pdo, $msg);        
 
         sql_delete($pdo, "alert_comments", "id", $msg_id);
+    }
+
+    if($msg_type === "messages")
+    {
+        $files = [];
+        $msg = sql_select_by_id($pdo, "alert_" . $msg_type, $msg_id);
+
+        del_files($pdo, $msg);
+
+        sql_delete($pdo, "alert_messages", "id", $msg_id);
     }
 }
 

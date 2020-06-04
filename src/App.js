@@ -8,6 +8,8 @@ import PrivateContainer from "./Private/PrivateContainer";
 import AccountContainer from "./Account/AccountContainer";
 import UsersContainer from "./Users/UsersContainer";
 import News from "./News/News";
+import ChatsContainer from "./Chats/ChatsContainer";
+import ChatPageContainer from "./ChatPage/ChatPageContainer";
 
 class App extends React.Component
 {
@@ -22,6 +24,8 @@ class App extends React.Component
                 <Route path="/alert/account" render={()=><Container> <AccountContainer /> </Container>} />
                 <Route path="/alert/users" render={()=><Container> <UsersContainer params={{attach_type: "none"}} /> </Container>} />
                 <Route path="/alert/news" render={()=><Container> <News /> </Container>} />
+                <Route exact path="/alert/chats" render={()=><Container> <ChatsContainer /> </Container>} />
+                <Route path="/alert/chats/:chat_id" render={()=><Container> <ChatPageContainer /> </Container>} />
             </div>
         );
     }

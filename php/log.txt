@@ -1,0 +1,5 @@
+﻿[04-Jun-2020 21:56:36 Europe/Moscow] PHP Warning:  PDOStatement::execute(): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mg42ms1' in 'where clause' in C:\xampp\htdocs\alert\php\sql.php on line 67
+[04-Jun-2020 21:56:36 Europe/Moscow] PHP Notice:  Undefined offset: 0 in C:\xampp\htdocs\alert\php\auth.php on line 22
+[04-Jun-2020 21:56:36 Europe/Moscow] PHP Warning:  PDOStatement::execute(): SQLSTATE[22007]: Invalid datetime format: 1366 Incorrect integer value: '' for column `test`.`alert_updates`.`id` at row 1 in C:\xampp\htdocs\alert\php\sql.php on line 44
+[04-Jun-2020 22:01:11 Europe/Moscow] PHP Parse error:  syntax error, unexpected ';', expecting ')' in C:\xampp\htdocs\alert\php\create_tables.php on line 118
+[04-Jun-2020 22:01:23 Europe/Moscow] PHP Warning:  PDOStatement::execute(): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mg42ms1' in 'where clause' in C:\xampp\htdocs\alert\php\sql.php on line 68

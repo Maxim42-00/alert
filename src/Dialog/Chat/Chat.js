@@ -17,8 +17,7 @@ class Chat extends React.Component
     {
         if(this.props.is_auth === false)
             this.props.history.push("/alert/login");
-
-        if(this.props.params.type === "chat")
+        else if(this.props.params.type === "messages")
         {
             setTimeout(this.scroll_down, 1000);
         }
@@ -33,7 +32,7 @@ class Chat extends React.Component
     render()
     {
         const style = {};
-        if(this.props.params.type === "chat")
+        if(this.props.params.type === "messages")
         {
             style.overflow = "auto";
         }

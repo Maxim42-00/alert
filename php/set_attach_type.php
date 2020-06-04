@@ -1,6 +1,6 @@
 <?php
 
-require "array_to_list.php";
+require_once "array_to_list.php";
 
 function set_attach_type($pdo, $my_id, $user_id, $attach_type)
 {

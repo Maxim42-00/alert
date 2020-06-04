@@ -15,9 +15,13 @@ class UpdateStorage extends React.Component
         {
             let display = {};
             display.comments = this.props.comments;
+            display.messages = this.props.messages;
+            display.chats = this.props.chats;
             let users_ids = [];
             if(this.props.chat_users_ids.length)
                 users_ids = this.props.chat_users_ids;
+            if(this.props.chatbox_users_ids.length)
+                users_ids = this.props.chatbox_users_ids;
             if(this.props.users_ids.length)
                 users_ids = this.props.users_ids;
             if(this.props.private_cur_user_id)

@@ -10,7 +10,7 @@ function mapStateToProps(params)
     return function(state)
     {
         let data;
-        if((params.type === "posts") || (params.type === "chat") || (params.type === "news"))
+        if((params.type === "posts") || (params.type === "messages") || (params.type === "news"))
             data = state.chat[params.type];
         if(params.type === "comments")
             data = state.chat[params.type][params.post_id];

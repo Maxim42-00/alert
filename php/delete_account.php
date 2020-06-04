@@ -2,7 +2,7 @@
 
 require_once "sql.php";
 require_once "is_auth.php";
-require "del_files.php";
+require_once "del_files.php";
 require_once "access_allow_origin.php";
 
 $my_id = is_auth();

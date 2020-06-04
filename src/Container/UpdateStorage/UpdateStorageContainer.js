@@ -6,9 +6,12 @@ function mapStateToProps(state)
 {
     return {
         comments: state.chat.comments_displayed,
+        messages: state.chat.chat_displayed,
+        chats: state.chats.chats_displayed,
         chat_users_ids: state.chat.users_ids,
         users_ids: state.users.users_ids,
-        private_cur_user_id: state.private.cur_user_id
+        private_cur_user_id: state.private.cur_user_id,
+        chatbox_users_ids: state.chats.chatbox_users_ids
     };
 }
 

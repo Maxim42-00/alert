@@ -2,7 +2,8 @@
 
 function accept_files($pdo, $user_id, $files, $target)
 {
-    $host_path = "http://localhost/alert/php/files/";
+ //   $host_path = "https://astro-margo.ru/alert/php/files/";
+    $host_path = "http://192.168.1.236/alert/php/files/";
     for($i=0; $i<count(($files)["error"]); $i++)
     {
         if($files["error"][$i] === 0 && $files["size"][$i]>0)

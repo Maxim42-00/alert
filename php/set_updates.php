@@ -18,7 +18,7 @@ function set_updates($pdo, $my_id, $msg_type, $target_id)
         $updates_json = json_encode($updates);
         sql_update_by_id($pdo, "alert_updates", $user_id, ["updates" => $updates_json]);
     }
-    if(($msg_type === "followers") || ($msg_type === "friends"))
+    if(($msg_type === "followers") || ($msg_type === "friends") || ($msg_type === "news") || ($msg_type === "new_chats") || ($msg_type === "messages") || ($msg_type === "del_message"))
     {
         $updates_json = (sql_select_by_id($pdo, "alert_updates", $my_id))["updates"];
         $updates = json_decode($updates_json, true);

@@ -22,3 +22,10 @@ function delete_updates($pdo, $user_id, $update_type, $target_id)
     $updates_json = json_encode($updates);
     return sql_update_by_id($pdo, "alert_updates", $user_id, ["updates" => $updates_json]);
 }
+
+function delete_quick_updates($pdo, $user_id)
+{
+    $updates_record = sql_select_by_id($pdo, "alert_updates", $user_id);
+    if(!$updates_record) return 0;
+    return sql_update_by_id($pdo, "alert_updates", $user_id, ["quick_updates" => "[]"]);
+}

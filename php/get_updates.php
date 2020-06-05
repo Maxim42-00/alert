@@ -3,12 +3,69 @@
 require_once "sql.php";
 require_once "is_auth.php";
 require_once "access_allow_origin.php";
+require_once "functions/print_r_txt.php";
+require_once "delete_updates.php";
+require_once "array_to_list.php";
 
 $online = $_POST["online"];
 $users_ids_json = $_POST["users_ids"];
 $users_ids = json_decode($users_ids_json, true);
+if(isset($_POST["f_display"]))
+{
+    $display_json = $_POST["f_display"];
+}
+else
+    $display_json = "[]";
 
-function get_updates($online, $users_ids)
+function set_visitors($pdo, $my_id, $action, $display)
+{
+    foreach($display as $section=>$ids)
+    {
+        foreach($ids as $id)
+        {
+            $visitors_record = sql_select_by_id($pdo, "alert_{$section}_visitors", $id);
+            if($visitors_record)
+            {
+                $visitors = json_decode($visitors_record["visitors"], true);
+                $key = array_search($my_id, $visitors);
+                if($key === false && $action === "add")
+                {
+                    $visitors[] = $my_id;
+                    sql_update_by_id($pdo, "alert_{$section}_visitors", $id, ["visitors" => json_encode($visitors)]);
+                }
+                if($key !== false && $action === "delete")
+                {
+                    unset($visitors[$key]);
+                    $visitors = array_to_list($visitors);
+                    sql_update_by_id($pdo, "alert_{$section}_visitors", $id, ["visitors" => json_encode($visitors)]);
+                }
+            }
+            else
+            {
+                if($action === "add")
+                {
+                    $visitors = [$my_id];
+                    sql_insert($pdo, "alert_{$section}_visitors", [$id, json_encode($visitors)]);
+                }
+            }
+        }
+    }
+}
+
+function update_visitors($pdo, $my_id, $display_json)
+{
+    $display = json_decode($display_json, true);
+print_r_txt("debug.txt", $display);
+    if($display)
+    {
+        $visiting = json_decode((sql_select_by_id($pdo, "alert_updates", $my_id))["visiting"], true);
+        sql_update_by_id($pdo, "alert_updates", $my_id, ["visiting" => $display_json]);
+        set_visitors($pdo, $my_id, "delete", $visiting);
+        set_visitors($pdo, $my_id, "add", $display);
+    }
+}
+
+function get_updates($online, $users_ids, $display_json)
 {
     $my_id = is_auth();
 
@@ -29,8 +86,13 @@ function get_updates($online, $users_ids)
 
         $my_updates_json = (sql_select_by_id($pdo, "alert_updates", $my_id))["updates"];
         $my_updates = json_decode($my_updates_json, true);
+        $my_quick_updates_json = (sql_select_by_id($pdo, "alert_updates", $my_id))["quick_updates"];
+        $my_quick_updates = json_decode($my_quick_updates_json, true);
 
-        return json_encode(["status" => "ok", "updates" => $my_updates, "user_id_to_online" => $user_id_to_online]);
+        update_visitors($pdo, $my_id, $display_json);
+        delete_quick_updates($pdo, $my_id);
+
+        return json_encode(["status" => "ok", "updates" => $my_updates, "quick_updates" => $my_quick_updates, "user_id_to_online" => $user_id_to_online]);
     }
     else
     {
@@ -38,4 +100,4 @@ function get_updates($online, $users_ids)
     }
 }
 
-echo get_updates($online, $users_ids);
+echo get_updates($online, $users_ids, $display_json);

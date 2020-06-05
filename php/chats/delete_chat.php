@@ -4,6 +4,7 @@ require_once "../access_allow_origin.php";
 require_once "../sql.php";
 require_once "../is_auth.php";
 require_once "../array_to_list.php";
+require_once "../delete_updates.php";
 
 $my_id = is_auth();
 
@@ -40,6 +41,16 @@ if($my_id)
         $my_chats = array_to_list($my_chats);
         sql_update_by_id($pdo, "alert_my_chats", $my_chat_record["id"], ["chats" => json_encode($my_chats)]);
     }
+
+    foreach($participants as $participant)
+    {
+        delete_updates($pdo, $participant, "messages", $chat_id);
+    }
+    foreach($inviters as $inviter)
+    {
+        delete_updates($pdo, $inviter, "chats", $chat_id);
+    }
+    sql_delete($pdo, "alert_messages", "chat_id", $chat_id);
     sql_delete_by_id($pdo, "alert_chats", $chat_id);
     
     echo json_encode(["status" => "ok"]);

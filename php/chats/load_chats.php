@@ -40,7 +40,7 @@ if($my_id)
             }
         }
     }
-    delete_updates($pdo, $my_id, "new_chats", "all");
+    delete_updates($pdo, $my_id, "chats", "all");
 
     echo json_encode(["status" => "ok", "chats" => $my_chats, "my_id" => $my_id]);
 }

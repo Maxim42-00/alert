@@ -16,7 +16,7 @@ class Menu extends React.Component
         if(number_of_news)
             news_updates_label = <div className="menu_update_label"> {number_of_news} </div>;
 
-        let number_of_chat_updates = this.props.number_of_new_chats + this.props.number_of_messages;
+        let number_of_chat_updates = this.props.number_of_chats + this.props.number_of_messages;
         let chats_updates_label = "";
         if(number_of_chat_updates)
             chats_updates_label = <div className="menu_update_label"> {number_of_chat_updates} </div>;

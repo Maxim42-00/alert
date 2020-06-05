@@ -10,7 +10,7 @@ function mapStateToProps(state)
         number_of_followers: state.update_storage.followers.length,
         number_of_friends: state.update_storage.friends.length,
         number_of_news: state.update_storage.news.length,
-        number_of_new_chats: state.update_storage.new_chats.length,
+        number_of_chats: state.update_storage.chats.length,
         number_of_messages: state.update_storage.messages.length
     };
 }

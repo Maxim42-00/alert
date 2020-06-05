@@ -9,7 +9,7 @@ function load_chats_thunk(dispatch)
 console.log("load_chats: ", data);
             dispatch({type: "SET_AUTH", auth: data.status, my_id: data.my_id});
             if(data.status === "ok")
-                dispatch({type: "CHATS_RECEIVED", chats: data.chats});
+                dispatch({type: "CHATS_RECEIVED", chats: data.chats, my_id: data.my_id});
         });
 }
 

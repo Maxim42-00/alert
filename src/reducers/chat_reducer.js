@@ -6,7 +6,7 @@ const default_state = {
     messages: [],
 
     comments_displayed: [],
-    chat_displayed: "",
+    chat_displayed: [],
     users_ids: []
 };
 
@@ -48,21 +48,14 @@ function chat_reducer(state = default_state, action)
     {
         if((action.params.type === "posts") || (action.params.type === "news") || (action.params.type === "messages"))
         {
-            if(state[action.params.type].length === action.messages.length)
-                return state;
             new_state[action.params.type] = [...action.messages];
         }
         if(action.params.type === "comments")
         {
-            if(state.comments[action.params.post_id])
-            {
-                if(state.comments[action.params.post_id].length === action.messages.length)
-                    return state;
-            }
             new_state.comments[action.params.post_id] = [...action.messages];
         }
         new_state.comments_displayed = get_comments_keys(new_state.comments);
-        new_state.chat_displayed = action.params.chat_id;
+        new_state.chat_displayed = action.params.chat_id ? [action.params.chat_id] : [];
 
         new_state.users_ids = get_users_ids_from_messages(new_state);
     }
@@ -76,7 +69,7 @@ function chat_reducer(state = default_state, action)
         else
             new_state[action.param_type] = [];
 
-        new_state.chat_displayed = "";
+        new_state.chat_displayed = [];
         new_state.users_ids = get_users_ids_from_messages(new_state);
     }
     return new_state;

@@ -66,7 +66,9 @@ $tables = [
     "alert_updates" => [
         "id" => "int(10) NOT NULL",
         "updates" => "text NOT NULL",
-        "online" => "tinytext NOT NULL"
+        "online" => "tinytext NOT NULL",
+        "visiting" => "tinytext NOT NULL",
+        "quick_updates" => "tinytext NOT NULL"
     ],
     "alert_follows" => [
         "id" => "int(10) NOT NULL",
@@ -79,6 +81,18 @@ $tables = [
     "alert_friends" => [
         "id" => "int(10) NOT NULL",
         "friends" => "text NOT NULL"
+    ],
+    "alert_messages_visitors" => [
+        "id" => "int(10) NOT NULL",
+        "visitors" => "text NOT NULL"
+    ],
+    "alert_chats_visitors" => [
+        "id" => "int(10) NOT NULL",
+        "visitors" => "text NOT NULL"
+    ],
+    "alert_comments_visitors" => [
+        "id" => "int(10) NOT NULL",
+        "visitors" => "text NOT NULL"
     ]
 ];
 

@@ -36,7 +36,7 @@ if($my_id)
         if(get_chat_participance($pdo, $my_id, $chat_id, $participant_id) === "none")
         {
             set_chat_participance($pdo, $chat_id, $participant_id, $participance);
-            set_updates($pdo, $participant_id, "new_chats", $chat_id);
+            set_updates($pdo, $participant_id, "chats", $chat_id);
         }
     }
 
@@ -45,7 +45,7 @@ if($my_id)
         if(get_chat_participance($pdo, $my_id, $chat_id, $participant_id) === "inviters")
         {
             set_chat_participance($pdo, $chat_id, $participant_id, $participance);
-            delete_updates($pdo, $participant_id, "new_chats", $chat_id);
+            delete_updates($pdo, $participant_id, "chats", $chat_id);
         }
     }
 

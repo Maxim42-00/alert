@@ -1,4 +1,13 @@
 Array
 (
-    [0] => 1
+    [comments] => Array
+        (
+            [0] => 4
+        )
+    [messages] => Array
+        (
+        )
+    [chats] => Array
+        (
+        )
 )

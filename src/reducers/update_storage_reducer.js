@@ -4,7 +4,7 @@ const default_state = {
     followers: [],
     friends: [],
     news: [],
-    new_chats: [],
+    chats: [],
     messages: []
 };
 
@@ -18,7 +18,7 @@ function app_reducer(state = default_state, action)
         new_state.follows = [];
         new_state.friends = [];
         new_state.news = [];
-        new_state.new_chats = [];
+        new_state.chats = [];
         new_state.messages = [];
 
         for(let key in action.updates_for_menu)

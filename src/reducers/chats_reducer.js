@@ -3,7 +3,7 @@ const default_state = {
     waiting: false,
     chatbox_users_ids: [],
     chat_participants: [],
-    chats_displayed: false
+    chats_displayed: []
 };
 
 function get_chatbox_users_ids(chats)
@@ -41,7 +41,7 @@ function chats_reducer(state = default_state, action)
         new_state.chats = [...action.chats];
         new_state.waiting = false;
         new_state.chatbox_users_ids = get_chatbox_users_ids(new_state.chats);
-        new_state.chats_displayed = true;
+        new_state.chats_displayed = [action.my_id];
         return new_state;
     }
     if(action.type === "DELETE_CHATS")
@@ -49,7 +49,7 @@ function chats_reducer(state = default_state, action)
         let new_state = state;
         new_state.chats = [];
         new_state.chatbox_users_ids = [];
-        new_state.chats_displayed = false;
+        new_state.chats_displayed = [];
         return new_state;
     }
     if(action.type === "NEW_CHAT")

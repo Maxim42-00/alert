@@ -8,6 +8,14 @@ require_once "get_chat_participance.php";
 require_once "set_chat_participance.php";
 require_once "../set_updates.php";
 require_once "../delete_updates.php";
+require_once "get_chat_participants_ids.php";
+
+function quick_notify_participants($pdo, $my_id, $chat_id)
+{
+    $participants = get_chat_participants_ids($pdo, $my_id, $chat_id);
+    foreach($participants as $participant)
+        set_updates($pdo, $participant, "chats", $chat_id, true);
+}
 
 $my_id = is_auth();
 
@@ -63,6 +71,7 @@ if($my_id)
         {
             set_chat_participance($pdo, $chat_id, $participant_id, "delete_inviter");
             set_chat_participance($pdo, $chat_id, $participant_id, $participance);
+            quick_notify_participants($pdo, $my_id, $chat_id);
         }
     }
 

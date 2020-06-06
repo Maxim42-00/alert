@@ -1,6 +1,6 @@
 import React from "react";
 import "./ChatParticipant.css";
-import UserImg from "../../../../../UserImg/UserImg";
+import UserImgContainer from "../../../../../UserImg/UserImgContainer";
 
 class ChatParticipant extends React.Component
 {
@@ -28,11 +28,10 @@ class ChatParticipant extends React.Component
         let set_participance_btn = "";
         if(this.props.grant_options)
             set_participance_btn = <div className="set_participance_btn" onClick={()=>this.props.set_chat_participance(this.props.chat_id, this.props.participant_id, dest_participance, {type: "participants", participance: this.props.participance})}> {btn_value} </div>;
-
         return (
             <div className="ChatParticipant">
                 <div>
-                    <UserImg user_id={this.props.participant_id} img={this.props.img} img_width="100" />
+                    <UserImgContainer user_id={this.props.participant_id} img={this.props.img} img_width="100" />
                 </div>
                 <div>
                     <div>

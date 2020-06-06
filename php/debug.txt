@@ -9,5 +9,6 @@ Array
         )
     [chats] => Array
         (
+            [0] => 3
         )
 )

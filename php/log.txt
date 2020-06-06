@@ -1,9 +1,6 @@
-﻿[05-Jun-2020 19:54:38 Europe/Moscow] PHP Warning:  require_once(get_post_user_id.php): failed to open stream: No such file or directory in C:\xampp\htdocs\alert\php\load_messages.php on line 12
-[05-Jun-2020 19:54:38 Europe/Moscow] PHP Fatal error:  require_once(): Failed opening required 'get_post_user_id.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\alert\php\load_messages.php on line 12
-[05-Jun-2020 19:54:38 Europe/Moscow] PHP Warning:  require_once(get_post_user_id.php): failed to open stream: No such file or directory in C:\xampp\htdocs\alert\php\load_messages.php on line 12
-[05-Jun-2020 19:54:38 Europe/Moscow] PHP Fatal error:  require_once(): Failed opening required 'get_post_user_id.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\alert\php\load_messages.php on line 12
-[05-Jun-2020 19:54:38 Europe/Moscow] PHP Warning:  require_once(get_post_user_id.php): failed to open stream: No such file or directory in C:\xampp\htdocs\alert\php\load_messages.php on line 12
-[05-Jun-2020 19:54:38 Europe/Moscow] PHP Fatal error:  require_once(): Failed opening required 'get_post_user_id.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\alert\php\load_messages.php on line 12
-[05-Jun-2020 19:54:39 Europe/Moscow] PHP Warning:  require_once(get_post_user_id.php): failed to open stream: No such file or directory in C:\xampp\htdocs\alert\php\load_messages.php on line 12
-[05-Jun-2020 19:54:39 Europe/Moscow] PHP Fatal error:  require_once(): Failed opening required 'get_post_user_id.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\alert\php\load_messages.php on line 12
-[05-Jun-2020 20:01:39 Europe/Moscow] PHP Warning:  Invalid argument supplied for foreach() in C:\xampp\htdocs\alert\php\get_updates.php on line 21
+﻿[06-Jun-2020 18:29:58 Europe/Moscow] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function get_target_id_of_msg(), 2 passed in C:\xampp\htdocs\alert\php\del_msg.php on line 36 and exactly 3 expected in C:\xampp\htdocs\alert\php\functions\get_target_id_of_msg.php:3
+Stack trace:
+#0 C:\xampp\htdocs\alert\php\del_msg.php(36): get_target_id_of_msg(Object(PDO), '9')
+#1 C:\xampp\htdocs\alert\php\del_msg.php(76): del_msg(Object(PDO), 'comments', '9')
+#2 {main}
+  thrown in C:\xampp\htdocs\alert\php\functions\get_target_id_of_msg.php on line 3

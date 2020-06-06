@@ -18,6 +18,7 @@ class UserImg extends React.Component
             width: (this.props.img_width/3) + "px",
             height: (this.props.img_width/3) + "px"
         };
+
         if(this.props.online === "online")
             online_label = <div className="online_label" style={label_style}> </div>;
 

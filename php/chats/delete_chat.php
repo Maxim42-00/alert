@@ -5,6 +5,7 @@ require_once "../sql.php";
 require_once "../is_auth.php";
 require_once "../array_to_list.php";
 require_once "../delete_updates.php";
+require_once "../set_updates.php";
 
 $my_id = is_auth();
 
@@ -45,10 +46,12 @@ if($my_id)
     foreach($participants as $participant)
     {
         delete_updates($pdo, $participant, "messages", $chat_id);
+        set_updates($pdo, $participant, "chats", $chat_id, true);
     }
     foreach($inviters as $inviter)
     {
         delete_updates($pdo, $inviter, "chats", $chat_id);
+        set_updates($pdo, $inviter, "chats", $chat_id, true);
     }
     sql_delete($pdo, "alert_messages", "chat_id", $chat_id);
     sql_delete_by_id($pdo, "alert_chats", $chat_id);

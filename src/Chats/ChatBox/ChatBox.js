@@ -1,6 +1,6 @@
 import React from "react";
 import "./ChatBox.css";
-import UserImg from "../../UserImg/UserImg";
+import UserImgContainer from "../../UserImg/UserImgContainer";
 import ChatBoxMenuContainer from "./ChatBoxMenu/ChatBoxMenuContainer";
 
 class ChatBox extends React.Component
@@ -12,7 +12,7 @@ class ChatBox extends React.Component
         {
             participant_img = (
                 <span>
-                    <UserImg user_id={this.props.participant.id} img={this.props.participant.img} img_width={"50"} />
+                    <UserImgContainer user_id={this.props.participant.id} img={this.props.participant.img} img_width={"50"} />
                     <div>{this.props.participant.name}</div>
                     <div>{this.props.participant.surname}</div>
                 </span>

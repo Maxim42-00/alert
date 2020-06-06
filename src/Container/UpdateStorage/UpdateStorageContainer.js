@@ -11,7 +11,8 @@ function mapStateToProps(state)
         chat_users_ids: state.chat.users_ids,
         users_ids: state.users.users_ids,
         private_cur_user_id: state.private.cur_user_id,
-        chatbox_users_ids: state.chats.chatbox_users_ids
+        chatbox_users_ids: state.chats.chatbox_users_ids,
+        chat_participants_ids: state.chats.chat_participants_ids
     };
 }
 

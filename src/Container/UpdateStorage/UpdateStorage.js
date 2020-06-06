@@ -18,12 +18,9 @@ class UpdateStorage extends React.Component
             display.messages = this.props.messages;
             display.chats = this.props.chats;
             let users_ids = [];
-            if(this.props.chat_users_ids.length)
-                users_ids = this.props.chat_users_ids;
-            if(this.props.chatbox_users_ids.length)
-                users_ids = this.props.chatbox_users_ids;
-            if(this.props.users_ids.length)
-                users_ids = this.props.users_ids;
+            users_ids = users_ids.concat(this.props.chat_users_ids, this.props.chatbox_users_ids, this.props.users_ids, this.props.chat_participants_ids);
+            users_ids = users_ids.filter((cur, i) => users_ids.indexOf(cur) === i);
+
             if(this.props.private_cur_user_id)
                 if(users_ids.indexOf(this.props.private_cur_user_id) === -1)
                     users_ids.push(this.props.private_cur_user_id);

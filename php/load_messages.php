@@ -10,6 +10,7 @@ require_once "delete_updates.php";
 require_once "access_allow_origin.php";
 require_once "news.php";
 require_once "functions/get_post_user_id.php";
+require_once "functions/get_visitors.php";
 
 function recall_backtrace($pdo, $recall_json)
 {
@@ -101,13 +102,9 @@ if($my_id)
         if($msg_type === "comments")
         {
             set_updates($pdo, get_post_user_id($pdo, $_POST["post_id"]), $msg_type, $_POST["post_id"]);
-            $visitors_record = sql_select_by_id($pdo, "alert_comments_visitors", $_POST["post_id"]);
-            if($visitors_record)
-            {
-                $visitors = json_decode($visitors_record["visitors"], true);
-                foreach($visitors as $visitor)
-                    set_updates($pdo, $visitor, $msg_type, $_POST["post_id"]);
-            }
+            $visitors = get_visitors($pdo, "comments", $_POST["post_id"]);
+            foreach($visitors as $visitor)
+                set_updates($pdo, $visitor, $msg_type, $_POST["post_id"], true);
         }
         if($msg_type === "posts")
             set_news_updates($pdo, $my_id);

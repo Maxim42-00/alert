@@ -5,14 +5,15 @@ const default_state = {
 
 function new_message_reducer(state = default_state, action)
 {
-    let new_state = {...state};
     if(action.type === "ADD_TO_RECALL")
     {
+        let new_state = {...state};
         new_state.msg_for_recall = {type: action.msg_type, id: action.msg_id};
         return new_state;
     }
     if(action.type === "DEL_MSG_FOR_RECALL")
     {
+        let new_state = {...state};
         new_state.msg_for_recall = "";
         return new_state;
     }

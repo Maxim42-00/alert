@@ -3,6 +3,7 @@
 require_once "../access_allow_origin.php";
 require_once "../sql.php";
 require_once "../is_auth.php";
+require_once "../functions/get_user_name_by_id.php";
 
 $my_id = is_auth();
 
@@ -10,7 +11,8 @@ if($my_id)
 {
     $pdo = sql_create_pdo();
 
-    sql_insert($pdo, "alert_chats", ["null", $my_id, " ", json_encode([$my_id]), time(), "[]"]);
+    $chat_name = get_user_name_by_id($pdo, $my_id);
+    sql_insert($pdo, "alert_chats", ["null", $my_id, $chat_name, json_encode([$my_id]), time(), "[]"]);
     $chat_id = sql_last_id($pdo, "alert_chats");
 
     $my_chats_ids_record = sql_select_by_id($pdo, "alert_my_chats", $my_id);
@@ -24,7 +26,7 @@ if($my_id)
     else
         sql_insert($pdo, "alert_my_chats", [$my_id, json_encode([$chat_id])]);
 
-    $chat = ["id" => $chat_id, "user_id" => $my_id, "chat_name" => " ", "participants" => [], "inviters" => []];
+    $chat = ["id" => $chat_id, "user_id" => $my_id, "chat_name" => $chat_name, "participants" => [], "inviters" => []];
     echo json_encode(["status" => "ok", "chat" => $chat]);
 }
 else

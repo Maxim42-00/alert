@@ -8,11 +8,11 @@ class Media extends React.Component
         if(this.props.m_type === "comments") width = "150";
         else width = "250";
         let media="";
-        if(this.props.f_type === "image/jpeg" || this.props.f_type === "image/png" || this.props.f_type === "image/gif" || this.props.f_type === "image/bmp")
+        if(this.props.f_type.match(/^image\/.*/))
             media = <img src={this.props.url} width={width} />;
-        if(this.props.f_type === "video/mp4")
+        if(this.props.f_type.match(/^video\/.*/))
             media = <video controls="controls" width={width}> <source src={this.props.url} /> </video>;
-        if(this.props.f_type === "audio/mpeg")
+        if(this.props.f_type.match(/^audio\/.*/))
             media = <audio controls="controls" width={width}> <source src={this.props.url} /> </audio>;
 
         return (

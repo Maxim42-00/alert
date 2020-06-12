@@ -10,8 +10,11 @@ function get_chat_participance($pdo, $my_id, $chat_id, $participant_id)
         return "participants";
     if(in_array($participant_id, $inviters))
         return "inviters";
-    $friends_ids = get_attached_users_ids($pdo, $my_id, "friends");
-    if(in_array($participant_id, $friends_ids))
-        return "none";
+    if($my_id)
+    {
+        $friends_ids = get_attached_users_ids($pdo, $my_id, "friends");
+        if(in_array($participant_id, $friends_ids))
+            return "none";
+    }
     return false;
 }

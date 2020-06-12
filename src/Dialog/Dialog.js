@@ -2,6 +2,7 @@
 import "./Dialog.css";
 import ChatContainer from "./Chat/ChatContainer";
 import NewMessageContainer from "./NewMessage/NewMessageContainer";
+import GotNewCommentsLabelContainer from "./GotNewCommentsLabel/GotNewCommentsLabelContainer";
 
 class Dialog extends React.Component
 {
@@ -53,7 +54,8 @@ class Dialog extends React.Component
             let show_comments_btn_text;
             if(!this.state.show_comments)
             {
-                show_comments_btn_text = "Показать комментарии";
+                
+                show_comments_btn_text = <GotNewCommentsLabelContainer post_id={this.props.params.post_id} />;
                 content = "";
             }
             if(this.state.show_comments) 

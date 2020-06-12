@@ -11,6 +11,7 @@ require_once "access_allow_origin.php";
 require_once "news.php";
 require_once "functions/get_post_user_id.php";
 require_once "functions/get_visitors.php";
+require_once "chats/get_chat_participance.php";
 
 function recall_backtrace($pdo, $recall_json)
 {
@@ -97,7 +98,6 @@ if($my_id)
             $values = ["null", $my_id, $_POST["post_id"], $time, $_SERVER["REMOTE_ADDR"], $text, json_encode($files, JSON_UNESCAPED_UNICODE), $recall];
         if($msg_type === "messages")
             $values = ["null", $my_id, $_POST["chat_id"], $time, $_SERVER["REMOTE_ADDR"], $text, json_encode($files, JSON_UNESCAPED_UNICODE), $recall];
-        sql_insert($pdo, "alert_" . $msg_type, $values);
 
         if($msg_type === "comments")
         {
@@ -105,10 +105,14 @@ if($my_id)
             $visitors = get_visitors($pdo, "comments", $_POST["post_id"]);
             foreach($visitors as $visitor)
                 set_updates($pdo, $visitor, $msg_type, $_POST["post_id"], true);
+            sql_insert($pdo, "alert_" . $msg_type, $values);
         }
         if($msg_type === "posts")
+        {
             set_news_updates($pdo, $my_id);
-        if($msg_type === "messages")
+            sql_insert($pdo, "alert_" . $msg_type, $values);
+        }
+        if($msg_type === "messages" && get_chat_participance($pdo, 0, $_POST["chat_id"], $my_id) === "participants")
         {
             $chat_participants = json_decode((sql_select_by_id($pdo, "alert_chats", $_POST["chat_id"]))["participants"], true);
             $key = array_search($my_id, $chat_participants);
@@ -116,6 +120,7 @@ if($my_id)
             foreach($chat_participants as $chat_participant)
                 set_updates($pdo, $chat_participant, $msg_type, $_POST["chat_id"]);
             sql_update_by_id($pdo, "alert_chats", $_POST["chat_id"], ["last_update" => $time]);
+            sql_insert($pdo, "alert_" . $msg_type, $values);
         }
     }
 

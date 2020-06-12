@@ -1,5 +1,7 @@
 <?php
 
+require_once "../array_to_list.php";
+
 function set_chat_participance($pdo, $chat_id, $participant_id, $participance)
 {
     $chat = sql_select_by_id($pdo, "alert_chats", $chat_id);
@@ -36,6 +38,7 @@ function set_chat_participance($pdo, $chat_id, $participant_id, $participance)
         $participance = ltrim($participance, "delete_") . 's';
         $chat_participants_ids = json_decode($chat[$participance], true);
         $chat_participants_ids = array_diff($chat_participants_ids, [$participant_id]);
+        $chat_participants_ids = array_to_list($chat_participants_ids);
         sql_update_by_id($pdo, "alert_chats", $chat_id, [$participance => json_encode($chat_participants_ids)]);
 
         $participant_chats_record = sql_select_by_id($pdo, "alert_my_chats", $participant_id);

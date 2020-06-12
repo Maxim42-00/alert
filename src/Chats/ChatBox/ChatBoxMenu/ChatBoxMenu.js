@@ -63,7 +63,6 @@ class ChatBoxMenu extends React.Component
                     <div className="chatbox_menu_item" onClick={()=>this.chatbox_menu_wnd("participants")}> Участники </div>
                     <div className="chatbox_menu_item" onClick={()=>this.chatbox_menu_wnd("inviters")}> Приглашенные </div>
                     <div className="chatbox_menu_item" onClick={()=>this.chatbox_menu_wnd("none")}> Пригласить </div>
-                    <div className="chatbox_menu_item" onClick={()=>this.chatbox_menu_wnd("chat_name")}> Имя чата </div>
                     <div className="chatbox_menu_item" onClick={()=>this.props.delete_chat(this.props.chat_id)}> Удалить Чат </div>
                 </div>
             );

@@ -56,7 +56,7 @@ function update_visitors($pdo, $my_id, $display_json)
 {
     $display = json_decode($display_json, true);
 print_r_txt("debug.txt", $display);
-    if($display)
+    if(is_array($display))
     {
         $visiting = json_decode((sql_select_by_id($pdo, "alert_updates", $my_id))["visiting"], true);
         sql_update_by_id($pdo, "alert_updates", $my_id, ["visiting" => $display_json]);

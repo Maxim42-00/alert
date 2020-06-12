@@ -63,6 +63,11 @@ class Account extends React.Component
     {
         if(!this.changed)
             return;
+        if(!this.state.name || !this.state.surname || !this.state.e_mail || !this.state.password)
+        {
+            alert("uncorrect data");
+            return;
+        }
         this.props.load_account_data(this.altered_data);
     }
     delete_account()
@@ -108,7 +113,7 @@ class Account extends React.Component
                     <input type="password" className="account_input" value={this.state.password} onChange={(e)=>this.input_change("password", e.target.value)} />
                 </div>
                 <div className="account_btn" onClick={this.load_account_data}> Сохранить Изменения </div>
-                <div className="account_btn" onClick={()=>this.delete_account()}> Удалить Аккаунт </div>
+                {/*<div className="account_btn" onClick={()=>this.delete_account()}> Удалить Аккаунт </div>*/}
             </div>
         );
     }

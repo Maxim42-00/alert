@@ -43,9 +43,9 @@ function get_users_ids_from_messages(new_state)
 
 function chat_reducer(state = default_state, action)
 {
-    let new_state = {...state};
     if(action.type === "LOAD_MESSAGES")
     {
+        let new_state = {...state};
         if((action.params.type === "posts") || (action.params.type === "news") || (action.params.type === "messages"))
         {
             new_state[action.params.type] = [...action.messages];
@@ -58,9 +58,11 @@ function chat_reducer(state = default_state, action)
         new_state.chat_displayed = action.params.chat_id ? [action.params.chat_id] : [];
 
         new_state.users_ids = get_users_ids_from_messages(new_state);
+        return new_state;
     }
     if(action.type === "REMOVE_DIALOG")
     {
+        let new_state = {...state};
         if(action.param_type === "comments")
         {
             delete(new_state.comments[action.post_id]);
@@ -71,8 +73,9 @@ function chat_reducer(state = default_state, action)
 
         new_state.chat_displayed = [];
         new_state.users_ids = get_users_ids_from_messages(new_state);
+        return new_state;
     }
-    return new_state;
+    return state;
 }
 
 export default chat_reducer;

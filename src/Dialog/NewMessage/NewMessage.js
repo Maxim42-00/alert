@@ -30,6 +30,10 @@ class NewMessage extends React.Component
         this.files_val.value="";
         this.props.del_msg_for_recall();
     }
+    componentDidUpdate()
+    {
+        this.textarea_style = {height: `${this.textarea_hidden.offsetHeight + 10}px`};
+    }
     render()
     {
         let msg_for_recall_div = this.props.msg_for_recall;
@@ -40,8 +44,9 @@ class NewMessage extends React.Component
         }
         return (
             <div className="NewMessage">
-                <textarea className="new_message_input" value={this.state.text} placeholder="Новое Сообщение" onChange={(e)=>this.on_change_text(e.target.value)}></textarea>
-                <input type="file" onChange={(e)=>this.on_change_file(e.target)}  ref={(r)=>this.files_val=r} multiple />
+                <textarea className="new_message_input" value={this.state.text} placeholder="Новое Сообщение" onChange={(e)=>this.on_change_text(e.target.value)} style={this.textarea_style}></textarea>
+                <pre className="textarea_hidden" ref={(r)=>this.textarea_hidden=r}>{this.state.text}</pre>
+                <input type="file" onChange={(e)=>this.on_change_file(e.target)}  ref={(r)=>this.files_val=r} multiple accept="image/*, video/*, audio/*" />
                 <div>{msg_for_recall_div}</div>
                 <span className="send_message" onClick={()=>this.send()}> Send </span>
             </div>

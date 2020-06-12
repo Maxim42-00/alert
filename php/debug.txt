@@ -2,13 +2,11 @@ Array
 (
     [comments] => Array
         (
-            [0] => 4
         )
     [messages] => Array
         (
         )
     [chats] => Array
         (
-            [0] => 3
         )
 )

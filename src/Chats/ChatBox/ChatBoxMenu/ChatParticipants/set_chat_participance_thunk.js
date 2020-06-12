@@ -17,7 +17,6 @@ function set_chat_participance_thunk(chat_id, participant_id, participance, init
             .then(data=>{
                 if(data.status === "ok")
                 {
-console.log(data);
                     if(initiated_from.type === "participants")
                         dispatch(load_chat_participants_thunk(chat_id, initiated_from.participance));
                     if(initiated_from.type === "chatbox")

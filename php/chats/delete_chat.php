@@ -45,8 +45,11 @@ if($my_id)
 
     foreach($participants as $participant)
     {
-        delete_updates($pdo, $participant, "messages", $chat_id);
-        set_updates($pdo, $participant, "chats", $chat_id, true);
+        if($participant != $my_id)
+        {
+            delete_updates($pdo, $participant, "messages", $chat_id);
+            set_updates($pdo, $participant, "chats", $chat_id, true);
+        }
     }
     foreach($inviters as $inviter)
     {

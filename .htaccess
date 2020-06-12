@@ -1,0 +1,13 @@
+RewriteEngine On
+RewriteRule (.*js)$ $1 [L]
+RewriteRule (.*css)$ $1 [L]
+RewriteRule (.*json)$ $1 [L]
+RewriteRule (.*ico)$ $1 [L]
+RewriteRule (.*png)$ $1 [L]
+RewriteRule (.*txt)$ $1 [L]
+RewriteRule (.*map)$ $1 [L]
+RewriteRule (.*php)$ $1 [L]
+RewriteRule (.*jpg)$ $1 [L]
+RewriteRule (.*mp3)$ $1 [L]
+RewriteRule (.*mp4)$ $1 [L]
+RewriteRule .* index.php [L]

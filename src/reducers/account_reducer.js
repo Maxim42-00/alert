@@ -9,14 +9,15 @@ const default_state = {
 
 function account_reducer(state = default_state, action)
 {
-    let new_state = {...state};
     if(action.type === "ACCOUNT_WAIT")
     {
+        let new_state = {...state};
         new_state.waiting = true;
         return new_state;
     }
     if(action.type === "ACCOUNT_DATA_RECEIVED")
     {
+        let new_state = {...state};
         new_state.waiting = false;
         if(action.status === "ok")
         {

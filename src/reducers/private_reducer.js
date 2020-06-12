@@ -13,14 +13,15 @@ const default_state = {
 
 function private_reducer(state = default_state, action)
 {
-    let new_state = {...state};
     if(action.type === "PRIVATE_WAIT")
     {
+        let new_state = {...state};
         new_state.waiting = true;
         return new_state;
     }
     if(action.type === "PRIVATE_DATA_RECEIVED")
     {
+        let new_state = {...state};
         new_state.waiting = false;
         if(action.status === "ok")
         {
@@ -37,17 +38,20 @@ function private_reducer(state = default_state, action)
     }
     if(action.type === "SHOW_CONTACTS_WND")
     {
+        let new_state = {...state};
         new_state.is_show_contacts_wnd = action.show;
         new_state.contacts_wnd_attach_type = action.attach_type;
         return new_state;
     }
     if(action.type === "PRIVATE_ATTACH_TYPE")
     {
+        let new_state = {...state};
         new_state.attach_type = action.attach_type;
         return new_state;
     }
     if(action.type === "PRIVATE_UNMOUNT")
     {
+        let new_state = {...state};
         new_state.name = "";
         new_state.surname = "";
         new_state.img = "";

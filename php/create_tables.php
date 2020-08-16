@@ -102,7 +102,9 @@ $pdo = sql_create_pdo();
 foreach($tables as $table => $fields)
 {
     sql_create_table($pdo, $table, $fields);
+    echo $table . " created" . "<br />";
   //  sql_delete_table($pdo, $table);
+  //  echo $table . " deleted" . "<br />";
 }
 
 //insert into alert_files values(0, 0, "image/jpeg", "http://localhost/alert/php/files/0.jpg", "account_img");

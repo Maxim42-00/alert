@@ -15,9 +15,12 @@ $my_id = is_auth();
 
 
 function del_msg($pdo, $msg_type, $msg_id)
-{
+{ 
     if($msg_type === "posts")
     {
+        $msg = sql_select_by_id($pdo, "alert_" . $msg_type, $msg_id);
+        del_files($pdo, $msg); 
+
         sql_delete_by_id($pdo, "alert_posts", $msg_id);
         $comments = sql_select($pdo, "alert_comments", "post_id", $msg_id);
         foreach($comments as $comment)
@@ -28,10 +31,8 @@ function del_msg($pdo, $msg_type, $msg_id)
     
     if($msg_type === "comments")
     {
-        $files = [];
         $msg = sql_select_by_id($pdo, "alert_" . $msg_type, $msg_id);
-
-        del_files($pdo, $msg);   
+        del_files($pdo, $msg); 
 
         $post_id = get_target_id_of_msg($pdo, "comments", $msg_id);
         if($post_id)
@@ -46,10 +47,8 @@ function del_msg($pdo, $msg_type, $msg_id)
 
     if($msg_type === "messages")
     {
-        $files = [];
         $msg = sql_select_by_id($pdo, "alert_" . $msg_type, $msg_id);
-
-        del_files($pdo, $msg);
+        del_files($pdo, $msg); 
 
         $chat_id = get_target_id_of_msg($pdo, "messages", $msg_id);
         if($chat_id)

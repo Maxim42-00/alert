@@ -22,10 +22,11 @@
     width: 90%;
     border: 1px solid black;
     overflow: visible;
-    margin: 5px 10px;
     visibility: hidden;
     position: absolute;
+    left: 0;
     z-index: -1;
+background-color: blue;
 }
 
 .send_message
